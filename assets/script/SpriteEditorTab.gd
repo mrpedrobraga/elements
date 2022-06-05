@@ -25,6 +25,15 @@ var current_primary_data_point = Color.WHITE:
 var current_secondary_data_point = Color.TRANSPARENT:
 	set(datum):
 		current_secondary_data_point = datum
+		var data_pickers = get_node("%Sampler")
+		for data_picker in data_pickers.get_children():
+			data_picker._on_secondary_data_point_changed(datum)
+var current_tertiary_data_point = Color.BLUE_VIOLET:
+	set(datum):
+		current_tertiary_data_point = datum
+		var data_pickers = get_node("%Sampler")
+		for data_picker in data_pickers.get_children():
+			data_picker._on_tertiary_data_point_changed(datum)
 
 enum DataType {COLOR_RGBA, UV, NORMAL, GRAYSCALE, INDEX}
 var current_data_type:DataType = DataType.COLOR_RGBA
@@ -101,6 +110,8 @@ func _on_color_picked(color, slot):
 		current_primary_data_point = color
 	if slot == 1:
 		current_secondary_data_point = color
+	if slot == 2:
+		current_tertiary_data_point = color
 func _on_uv_picked(uv):
 	current_primary_data_point = uv
 

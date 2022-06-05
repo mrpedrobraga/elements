@@ -64,7 +64,14 @@ func _on_canvas_input(event:InputEvent, position:Vector2):
 	# When the mouse is moving!
 	if event is InputEventMouseMotion:
 		if mouse_l_down:
-			line(mouse_last_position,position,set_datum,sprite_editor.current_primary_data_point)
+			line(
+				mouse_last_position,
+				position,
+				set_datum,
+				sprite_editor.current_tertiary_data_point
+				if Input.is_action_pressed("Use Third Datum") else
+				sprite_editor.current_primary_data_point 
+			)
 			mouse_last_position = position
 		elif mouse_r_down:
 			line(mouse_last_position,position,set_datum,sprite_editor.current_secondary_data_point)

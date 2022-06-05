@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ci5uuhfmiwus1"]
+[gd_scene load_steps=24 format=3 uid="uid://ci5uuhfmiwus1"]
 
 [ext_resource type="Texture2D" uid="uid://drpwb8v0r5ri8" path="res://demo/reference_andy.png" id="2_in3wx"]
 [ext_resource type="Script" path="res://assets/script/SpriteEditorTab.gd" id="2_jo5pk"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://assets/script/components/LayerTypes/RasterDataLayer.gd" id="4_f53ua"]
 [ext_resource type="Script" path="res://assets/script/components/LayerTypes/GroupLayer.gd" id="5_mc1wm"]
 [ext_resource type="Texture2D" uid="uid://dsk8am258se6u" path="res://assets/images/icons/1x/tool_brush.png" id="6_ad4tr"]
+[ext_resource type="Texture2D" uid="uid://bkj3jyaxknayi" path="res://demo/chroma-quirk-palette.png" id="7_hkcf0"]
 [ext_resource type="Texture2D" uid="uid://7r0ihab3skow" path="res://assets/images/icons/1x/outline_remove_white_24dp.png" id="7_svpsx"]
 [ext_resource type="PackedScene" uid="uid://bb6nkfh2xpiga" path="res://assets/components/DataPickers/ColorPicker.tscn" id="7_tcwj8"]
 [ext_resource type="Texture2D" uid="uid://bir14t176x7th" path="res://assets/images/icons/1x/outline_colorize_white_24dp.png" id="7_xl2x1"]
@@ -37,14 +38,33 @@ bg_color = Color(0.117647, 0.117647, 0.117647, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gtcr0"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_t162d"]
-viewport_path = NodePath("Render Pipeline/RHLayers/RootLayer")
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m7jaj"]
 bg_color = Color(0, 0, 0, 1)
 draw_center = false
 shadow_color = Color(0, 0, 0, 0.227451)
 shadow_size = 24
+
+[sub_resource type="GDScript" id="GDScript_x5jik"]
+script/source = "extends Tree
+
+func _ready():
+	var root = create_item(null)
+	root.set_text(0, \"Root\")
+	
+	create_item_quick(root, \"addons\")
+	var img = create_item_quick(root, \"img\")
+	create_item_quick(root, \"audio\")
+	create_item_quick(root, \"music\")
+	
+	create_item_quick(img, \"sprites\")
+	create_item_quick(img, \"tilesets\")
+	create_item_quick(img, \"ui\")
+
+func create_item_quick(parent:TreeItem, text:String) -> TreeItem :
+	var item : TreeItem = create_item(parent)
+	item.set_text(0, text)
+	return item
+"
 
 [node name="SpriteEditorTab" type="Panel"]
 texture_filter = 1
@@ -121,49 +141,60 @@ unique_name_in_owner = true
 self_modulate = Color(1, 1, 1, 0.639216)
 minimum_size = Vector2(200, 0)
 offset_right = 200.0
-offset_bottom = 600.0
+offset_bottom = 700.0
 theme_override_styles/panel = SubResource( "StyleBoxFlat_ah2m4" )
 
 [node name="V" type="VBoxContainer" parent="H/Dock_LEFT"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Control" type="Control" parent="H/Dock_LEFT/V"]
+[node name="Label" type="Label" parent="H/Dock_LEFT/V"]
 offset_right = 200.0
-offset_bottom = 172.0
+offset_bottom = 28.0
+text = "Palette"
+
+[node name="Control" type="Control" parent="H/Dock_LEFT/V"]
+minimum_size = Vector2(0, 200)
+offset_top = 32.0
+offset_right = 200.0
+offset_bottom = 232.0
+
+[node name="TextureRect" type="TextureRect" parent="H/Dock_LEFT/V/Control"]
+minimum_size = Vector2(0, 157)
+anchor_right = 1.0
+offset_bottom = 11.0
+texture = ExtResource( "7_hkcf0" )
+stretch_mode = 5
+
+[node name="Panel" type="TabContainer" parent="H/Dock_LEFT/V"]
+minimum_size = Vector2(0, 180)
+offset_top = 236.0
+offset_right = 200.0
+offset_bottom = 456.0
 size_flags_vertical = 3
 
-[node name="Panel" type="Panel" parent="H/Dock_LEFT/V"]
-minimum_size = Vector2(0, 180)
-offset_top = 176.0
-offset_right = 200.0
-offset_bottom = 356.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="H/Dock_LEFT/V/Panel"]
+[node name="Tool" type="VBoxContainer" parent="H/Dock_LEFT/V/Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 33.0
+offset_right = -4.0
+offset_bottom = -4.0
 
-[node name="Label" type="Label" parent="H/Dock_LEFT/V/Panel/VBoxContainer"]
-offset_right = 200.0
-offset_bottom = 27.0
-theme_override_font_sizes/font_size = 13
-text = "Tool Properties"
-
-[node name="GridContainer" type="GridContainer" parent="H/Dock_LEFT/V/Panel/VBoxContainer"]
-offset_top = 31.0
-offset_right = 200.0
-offset_bottom = 180.0
+[node name="GridContainer" type="GridContainer" parent="H/Dock_LEFT/V/Panel/Tool"]
+offset_right = 192.0
+offset_bottom = 183.0
 size_flags_vertical = 3
 columns = 2
 
-[node name="Label" type="Label" parent="H/Dock_LEFT/V/Panel/VBoxContainer/GridContainer"]
+[node name="Label" type="Label" parent="H/Dock_LEFT/V/Panel/Tool/GridContainer"]
 offset_right = 45.0
 offset_bottom = 28.0
 text = "Size"
 
-[node name="SpinBox" type="SpinBox" parent="H/Dock_LEFT/V/Panel/VBoxContainer/GridContainer"]
+[node name="SpinBox" type="SpinBox" parent="H/Dock_LEFT/V/Panel/Tool/GridContainer"]
 offset_left = 49.0
-offset_right = 200.0
+offset_right = 192.0
 offset_bottom = 28.0
 size_flags_horizontal = 3
 min_value = 1.0
@@ -175,9 +206,9 @@ suffix = "px"
 unique_name_in_owner = true
 clip_contents = true
 minimum_size = Vector2(0, 240)
-offset_top = 360.0
+offset_top = 460.0
 offset_right = 200.0
-offset_bottom = 600.0
+offset_bottom = 700.0
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 12
 
@@ -260,13 +291,13 @@ offset_bottom = -4.0
 [node name="V" type="VBoxContainer" parent="H"]
 offset_left = 204.0
 offset_right = 1020.0
-offset_bottom = 600.0
+offset_bottom = 700.0
 size_flags_horizontal = 3
 
 [node name="Dock_DOCUMENT" type="SubViewportContainer" parent="H/V"]
 texture_filter = 1
 offset_right = 816.0
-offset_bottom = 596.0
+offset_bottom = 496.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
@@ -277,7 +308,7 @@ canvas_camera_path = NodePath("Canvas_Viewport/CanvasCamera")
 transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
-size = Vector2i(816, 596)
+size = Vector2i(816, 496)
 render_target_update_mode = 4
 
 [node name="CanvasCamera" type="Camera2D" parent="H/V/Dock_DOCUMENT/Canvas_Viewport"]
@@ -296,7 +327,6 @@ offset_right = 32.0
 offset_bottom = 32.0
 pivot_offset = Vector2(16, 16)
 focus_mode = 1
-texture = SubResource( "ViewportTexture_t162d" )
 ignore_texture_size = true
 metadata/_edit_group_ = true
 metadata/_edit_layout_mode = 1
@@ -369,16 +399,47 @@ energy = 0.2
 [node name="Dock_BOTTOM" type="Panel" parent="H/V"]
 unique_name_in_owner = true
 clip_contents = true
-offset_top = 600.0
+minimum_size = Vector2(0, 200)
+offset_top = 500.0
 offset_right = 816.0
-offset_bottom = 600.0
+offset_bottom = 700.0
 size_flags_stretch_ratio = 0.5
+
+[node name="V" type="VBoxContainer" parent="H/V/Dock_BOTTOM"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TabContainer" type="TabContainer" parent="H/V/Dock_BOTTOM/V"]
+offset_right = 816.0
+offset_bottom = 169.0
+size_flags_vertical = 3
+tabs_visible = false
+
+[node name="Workspace" type="Tree" parent="H/V/Dock_BOTTOM/V/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 6.0
+offset_right = -4.0
+offset_bottom = -4.0
+allow_rmb_select = true
+hide_root = true
+select_mode = 2
+script = SubResource( "GDScript_x5jik" )
+
+[node name="TabBar" type="TabBar" parent="H/V/Dock_BOTTOM/V"]
+offset_top = 173.0
+offset_right = 816.0
+offset_bottom = 200.0
+tab_count = 2
+tab_0/title = "Animation"
+tab_1/title = "Workspace"
 
 [node name="Dock_RIGHT" type="Panel" parent="H"]
 unique_name_in_owner = true
 offset_left = 1024.0
 offset_right = 1024.0
-offset_bottom = 600.0
+offset_bottom = 700.0
 
 [node name="DataSamplerWindow" type="Window" parent="."]
 title = "Data Sampler"

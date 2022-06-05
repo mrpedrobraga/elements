@@ -34,8 +34,6 @@ func _on_primary_data_point_changed(datum):
 	if not datum is Color:
 		print_debug("(!) Datum Passed to Color Picker isn't of type Color.")
 		return
-	if current_color_slot == 0:
-		get_node("HSV Picker").initialize(datum)
 	
 	primary_color_view.color = datum
 
@@ -43,8 +41,13 @@ func _on_secondary_data_point_changed(datum):
 	if not datum is Color:
 		print_debug("(!) Datum Passed to Color Picker isn't of type Color.")
 		return
-	if current_color_slot == 1:
-		get_node("HSV Picker").initialize(datum)
+	
+	secondary_color_view.color = datum
+
+func _on_tertiary_data_point_changed(datum):
+	if not datum is Color:
+		print_debug("(!) Datum Passed to Color Picker isn't of type Color.")
+		return
 	
 	secondary_color_view.color = datum
 

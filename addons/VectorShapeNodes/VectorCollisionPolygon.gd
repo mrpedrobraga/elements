@@ -1,9 +1,10 @@
-tool
+@tool
 extends CollisionPolygon2D
 class_name VectorCollisionPolygon
 # Collision Polygon with points updated from a VectorPath
 
-export(NodePath) var path_node_path setget set_path_node_path
+@export_node_path var path_node_path:
+	set(v): set_path_node_path(v)
 var is_vector_fill := true
 
 
@@ -15,7 +16,7 @@ func _get_configuration_warning():
 
 func set_path_node_path(new_path :NodePath) -> void:
 	path_node_path = new_path
-	update_configuration_warning()
+	update_configuration_warnings()
 
 
 func update_polygon():

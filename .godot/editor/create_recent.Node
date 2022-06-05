@@ -1,7 +1,16 @@
-Control
-TextureRect
-Label
+TabBar
 VBoxContainer
+TabContainer
+Tree
+LinkButton
+HBoxContainer
+TextureRect
+CenterContainer
+Label
+Panel
+VSeparator
+Node2D
+Control
 SpinBox
 GraphNode
 ColorRect
@@ -21,12 +30,3 @@ Polygon2D
 GroupLayer (GroupLayer.gd)
 RasterDataLayer (RasterDataLayer.gd)
 Node
-OmniLight3D
-GPUParticles2D
-Sprite2D
-DirectionalLight2D
-PointLight2D
-GridContainer
-Panel
-Window
-Button

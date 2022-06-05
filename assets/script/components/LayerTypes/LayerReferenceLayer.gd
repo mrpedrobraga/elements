@@ -33,20 +33,3 @@ func get_type():
 
 func get_effective_type():
 	return referenced_layer.get_type()
-
-######## Creating Editor Controls #######
-
-func create_controls(editor:SpriteEditor):
-	var data = get_current_frame()
-	
-	layer_view = editor.layer_view_scene.instantiate()
-	var texture = ImageTexture.new()
-	data.fill(Color.TRANSPARENT)
-	texture.create_from_image(data)
-	layer_view.texture = texture
-	layer_view.material = ShaderMaterial.new()
-	layer_view.gui_input.connect(editor._on_canvas_gui_input)
-	editor.layer_views.push_back(layer_view)
-	editor.canvas.add_child(layer_view)
-	
-	editor.get_node("%Dock_Layers/Items").add_item(display_name)

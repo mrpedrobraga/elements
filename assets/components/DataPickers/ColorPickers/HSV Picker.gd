@@ -19,11 +19,12 @@ func _on_h_slider_gui_input(event):
 	common_event(event)
 	if event is InputEventMouse and (l_mouse_down or r_mouse_down):
 		var pos = event.position / slider_H.size
-		color.h = clamp(pos.y, 0.0, 1.0)
 		h = clamp(pos.y, 0.0, 1.0)
-		square_SV.material.set_shader_param("hue", h)
-		slider_A.color = color
+		
 		update_color()
+		
+		slider_A.color = color
+		square_SV.material.set_shader_param("hue", h)
 
 func _on_a_slider_gui_input(event):
 	if not slider_A.has_focus():
@@ -32,8 +33,10 @@ func _on_a_slider_gui_input(event):
 	if event is InputEventMouse and (l_mouse_down or r_mouse_down):
 		var pos = event.position / slider_A.size
 		a = clamp(pos.x, 0.0, 1.0)
-		color.a = a
+		
 		update_color()
+		
+		color.a = a
 
 func _on_sv_square_gui_input(event):
 	if not square_SV.has_focus():
@@ -45,7 +48,9 @@ func _on_sv_square_gui_input(event):
 		v = clamp(1.0 - pos.y, 0.0, 1.0)
 		color.s = s
 		color.v = v
+		
 		update_color()
+		
 		slider_A.color = color
 
 func common_event(event):
@@ -57,6 +62,7 @@ func common_event(event):
 		if not event.pressed:
 			color_picked.emit(color)
 			if get_parent() is ColorPickerControl:
+				pass
 				get_parent().color_picked.emit(color, get_parent().current_color_slot)
 		update_color()
 
@@ -92,6 +98,7 @@ func _draw():
 	
 	var pos_a = Vector2(a * slider_A.size.x, slider_A.position.y)
 	var pos_b = Vector2(a * slider_A.size.x, slider_A.position.y + slider_A.size.y)
+	
 	draw_rect(
 		Rect2(
 			pos_a.x - 4,
@@ -99,7 +106,10 @@ func _draw():
 			pos_b.x - pos_a.x + 8,
 			pos_b.y - pos_a.y + 8
 		),
-		Color("#222222"), 3.0)
+		Color("#222222"),
+		3.0
+	)
+	
 	draw_rect(
 		Rect2(
 			pos_a.x - 3,
@@ -107,4 +117,6 @@ func _draw():
 			pos_b.x - pos_a.x + 6,
 			pos_b.y - pos_a.y + 6
 		),
-		Color(color.r, color.g, color.b, 1.0), 3.0)
+		Color(color.r, color.g, color.b, 1.0),
+		3.0
+	)
