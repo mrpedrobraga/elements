@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://wf3m1hpqtqu0"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_q6awb"]
+
+[node name="LayerView" type="TextureRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ToolPreview" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( "ImageTexture_q6awb" )

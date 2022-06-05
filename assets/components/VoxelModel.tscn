@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbhummtqwgis4"]
+
+[ext_resource type="Shader" path="res://assets/shaders/Raymarch.gdshader" id="1_dkgc1"]
+[ext_resource type="Texture2D" uid="uid://i8np04mwu520" path="res://demo/fbidle-slices.slices.png" id="2_3rhjc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f6nxh"]
+render_priority = 0
+shader = ExtResource( "1_dkgc1" )
+shader_param/model_size = Vector3(106, 129, 91)
+shader_param/model = ExtResource( "2_3rhjc" )
+
+[sub_resource type="BoxMesh" id="BoxMesh_ftkg2"]
+
+[node name="VoxelInstance" type="MeshInstance3D"]
+transform = Transform3D(0.66996, 0, 0, 0, -0.676923, -0.0211042, 0, 0.0333084, -0.428897, 0, 0.0484526, 0)
+material_override = SubResource( "ShaderMaterial_f6nxh" )
+mesh = SubResource( "BoxMesh_ftkg2" )

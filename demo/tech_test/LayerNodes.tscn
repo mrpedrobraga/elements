@@ -1,0 +1,292 @@
+[gd_scene load_steps=11 format=3 uid="uid://drncgxem6juxp"]
+
+[ext_resource type="Script" path="res://demo/tech_test/GraphEdit.gd" id="1_67xtq"]
+[ext_resource type="Texture2D" uid="uid://drpwb8v0r5ri8" path="res://demo/reference_andy.png" id="2_xx0pn"]
+
+[sub_resource type="Shader" id="Shader_l4trr"]
+code = "shader_type canvas_item;
+
+void fragment() {
+	COLOR = vec4(UV, 0.0, 1.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y6mte"]
+shader = SubResource( "Shader_l4trr" )
+
+[sub_resource type="Shader" id="Shader_d3bs0"]
+code = "shader_type canvas_item;
+
+void fragment() {
+	COLOR = vec4(UV * 2.0, 0.0, 1.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8k2xm"]
+shader = SubResource( "Shader_d3bs0" )
+
+[sub_resource type="Shader" id="Shader_10b5n"]
+code = "shader_type canvas_item;
+
+void fragment() {
+	vec4 c =  vec4(fract(UV * 2.0), 0.0, 1.0);
+	COLOR = c;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c4ff6"]
+shader = SubResource( "Shader_10b5n" )
+
+[sub_resource type="Shader" id="Shader_wiyhn"]
+code = "shader_type canvas_item;
+
+void fragment() {
+	vec4 c =  texture(TEXTURE, fract(UV * 2.0));
+	COLOR = c;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5y3ay"]
+shader = SubResource( "Shader_wiyhn" )
+
+[node name="Control" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="."]
+offset_right = 1024.0
+offset_bottom = 28.0
+text = "Procedural Edit"
+
+[node name="GraphEdit" type="GraphEdit" parent="."]
+offset_top = 28.0
+offset_right = 1024.0
+offset_bottom = 600.0
+size_flags_vertical = 3
+minimap_enabled = false
+script = ExtResource( "1_67xtq" )
+
+[node name="UV" type="GraphNode" parent="GraphEdit"]
+offset_left = 30.0
+offset_top = 80.0
+offset_right = 226.0
+offset_bottom = 238.0
+mouse_filter = 1
+title = "UV"
+position_offset = Vector2(30, 80)
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = true
+slot/0/right_type = 1
+slot/0/right_color = Color(1, 0.0784314, 0.27451, 1)
+slot/0/right_icon = null
+
+[node name="ColorRect" type="ColorRect" parent="GraphEdit/UV"]
+material = SubResource( "ShaderMaterial_y6mte" )
+minimum_size = Vector2(100, 100)
+offset_left = 28.0
+offset_top = 24.0
+offset_right = 168.0
+offset_bottom = 153.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Texture" type="GraphNode" parent="GraphEdit"]
+offset_left = 488.0
+offset_top = 73.0
+offset_right = 684.0
+offset_bottom = 231.0
+mouse_filter = 1
+title = "andy.png"
+position_offset = Vector2(488, 73)
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = true
+slot/0/right_type = 0
+slot/0/right_color = Color(0, 0.552941, 1, 1)
+slot/0/right_icon = null
+
+[node name="ColorRect" type="TextureRect" parent="GraphEdit/Texture"]
+minimum_size = Vector2(100, 100)
+offset_left = 28.0
+offset_top = 24.0
+offset_right = 168.0
+offset_bottom = 153.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( "2_xx0pn" )
+stretch_mode = 5
+
+[node name="Num" type="GraphNode" parent="GraphEdit"]
+offset_left = 102.0
+offset_top = 252.0
+offset_right = 228.0
+offset_bottom = 307.0
+mouse_filter = 1
+title = "Number"
+position_offset = Vector2(102, 252)
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = true
+slot/0/right_type = 0
+slot/0/right_color = Color(0.121569, 1, 0.376471, 1)
+slot/0/right_icon = null
+
+[node name="SpinBox" type="SpinBox" parent="GraphEdit/Num"]
+offset_left = 28.0
+offset_top = 24.0
+offset_right = 98.0
+offset_bottom = 50.0
+value = 2.0
+
+[node name="Scale" type="GraphNode" parent="GraphEdit"]
+offset_left = 261.0
+offset_top = 153.0
+offset_right = 457.0
+offset_bottom = 340.0
+mouse_filter = 1
+title = "Product"
+position_offset = Vector2(261, 153)
+slot/0/left_enabled = true
+slot/0/left_type = 1
+slot/0/left_color = Color(1, 0.0784314, 0.27451, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 0.0784314, 0.27451, 1)
+slot/0/right_icon = null
+slot/1/left_enabled = true
+slot/1/left_type = 0
+slot/1/left_color = Color(1, 0.0784314, 0.27451, 1)
+slot/1/left_icon = null
+slot/1/right_enabled = false
+slot/1/right_type = 0
+slot/1/right_color = Color(1, 1, 1, 1)
+slot/1/right_icon = null
+slot/2/left_enabled = false
+slot/2/left_type = 0
+slot/2/left_color = Color(1, 1, 1, 1)
+slot/2/left_icon = null
+slot/2/right_enabled = true
+slot/2/right_type = 0
+slot/2/right_color = Color(1, 0.0784314, 0.27451, 1)
+slot/2/right_icon = null
+
+[node name="Label" type="Label" parent="GraphEdit/Scale"]
+offset_left = 28.0
+offset_top = 24.0
+offset_right = 168.0
+offset_bottom = 52.0
+text = "a"
+
+[node name="Label2" type="Label" parent="GraphEdit/Scale"]
+offset_left = 28.0
+offset_top = 53.0
+offset_right = 168.0
+offset_bottom = 81.0
+text = "b"
+
+[node name="ColorRect" type="ColorRect" parent="GraphEdit/Scale"]
+material = SubResource( "ShaderMaterial_8k2xm" )
+minimum_size = Vector2(100, 100)
+offset_left = 28.0
+offset_top = 82.0
+offset_right = 168.0
+offset_bottom = 182.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="UV3" type="GraphNode" parent="GraphEdit"]
+offset_left = 491.0
+offset_top = 259.0
+offset_right = 687.0
+offset_bottom = 417.0
+mouse_filter = 1
+title = "Fract"
+position_offset = Vector2(491, 259)
+slot/0/left_enabled = true
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 0.0784314, 0.27451, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = true
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 0.0784314, 0.27451, 1)
+slot/0/right_icon = null
+
+[node name="ColorRect" type="ColorRect" parent="GraphEdit/UV3"]
+material = SubResource( "ShaderMaterial_c4ff6" )
+minimum_size = Vector2(100, 100)
+offset_left = 28.0
+offset_top = 24.0
+offset_right = 168.0
+offset_bottom = 153.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Final" type="GraphNode" parent="GraphEdit"]
+offset_left = 741.0
+offset_top = 185.0
+offset_right = 937.0
+offset_bottom = 420.0
+mouse_filter = 1
+title = "Layer0"
+position_offset = Vector2(741, 185)
+slot/0/left_enabled = true
+slot/0/left_type = 0
+slot/0/left_color = Color(0, 0.552941, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 0.0784314, 0.27451, 1)
+slot/0/right_icon = null
+slot/1/left_enabled = true
+slot/1/left_type = 0
+slot/1/left_color = Color(1, 0.0784314, 0.27451, 1)
+slot/1/left_icon = null
+slot/1/right_enabled = false
+slot/1/right_type = 0
+slot/1/right_color = Color(1, 1, 1, 1)
+slot/1/right_icon = null
+slot/2/left_enabled = false
+slot/2/left_type = 0
+slot/2/left_color = Color(1, 1, 1, 1)
+slot/2/left_icon = null
+slot/2/right_enabled = false
+slot/2/right_type = 0
+slot/2/right_color = Color(1, 0.0784314, 0.27451, 1)
+slot/2/right_icon = null
+
+[node name="Label" type="Label" parent="GraphEdit/Final"]
+offset_left = 28.0
+offset_top = 24.0
+offset_right = 168.0
+offset_bottom = 52.0
+text = "Texture"
+
+[node name="Label2" type="Label" parent="GraphEdit/Final"]
+offset_left = 28.0
+offset_top = 53.0
+offset_right = 168.0
+offset_bottom = 81.0
+text = "Coords"
+
+[node name="ColorRect" type="TextureRect" parent="GraphEdit/Final"]
+material = SubResource( "ShaderMaterial_5y3ay" )
+minimum_size = Vector2(100, 100)
+offset_left = 28.0
+offset_top = 82.0
+offset_right = 168.0
+offset_bottom = 230.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( "2_xx0pn" )
+stretch_mode = 5
+
+[connection signal="connection_request" from="GraphEdit" to="GraphEdit" method="_on_graph_edit_connection_request"]

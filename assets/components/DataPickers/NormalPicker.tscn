@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://dhkr1ora73qpq"]
+
+[ext_resource type="Script" path="res://assets/components/DataPickers/NormalPicker.gd" id="1_jkir3"]
+[ext_resource type="Texture2D" uid="uid://dko4ewnevk74" path="res://demo/sampledNormals.png" id="2_ra7wb"]
+
+[sub_resource type="Shader" id="Shader_3vost"]
+code = "shader_type canvas_item;
+
+void fragment() {
+    vec3 color = vec3(1.0);
+	
+	vec3 normal = texture(TEXTURE, UV).rgb * 2.0 - 1.0;
+	
+	vec3 light_pos = vec3(3.0*sin(TIME), 3.0*cos(TIME), 1.0);
+	
+	color = dot(normal, normalize(light_pos)) * vec3(1.0);
+	
+	COLOR = vec4(color, 1.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yokns"]
+shader = SubResource( "Shader_3vost" )
+
+[node name="Normal" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( "1_jkir3" )
+metadata/_edit_vertical_guides_ = [127.0]
+
+[node name="Sphere" type="TextureRect" parent="."]
+show_behind_parent = true
+material = SubResource( "ShaderMaterial_yokns" )
+offset_right = 1024.0
+offset_bottom = 600.0
+size_flags_vertical = 3
+texture = ExtResource( "2_ra7wb" )
+ignore_texture_size = true
+stretch_mode = 5

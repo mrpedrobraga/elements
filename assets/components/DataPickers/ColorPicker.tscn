@@ -1,0 +1,116 @@
+[gd_scene load_steps=10 format=3 uid="uid://bb6nkfh2xpiga"]
+
+[ext_resource type="Script" path="res://assets/components/DataPickers/ColorPicker.gd" id="1_tmbwj"]
+[ext_resource type="Script" path="res://assets/components/DataPickers/ColorPickers/HSV Picker.gd" id="2_x34xs"]
+[ext_resource type="Shader" path="res://assets/shaders/editor/SVGradient.gdshader" id="3_bshig"]
+[ext_resource type="Shader" path="res://assets/shaders/editor/HGradient.gdshader" id="4_q0oed"]
+[ext_resource type="Shader" path="res://assets/shaders/editor/AGradient.gdshader" id="5_jn2xp"]
+[ext_resource type="Texture2D" uid="uid://dsnbqhy6nrnr4" path="res://assets/images/defaults/sprite_editor_back.png" id="6_al4vr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bo1sq"]
+shader = ExtResource( "3_bshig" )
+shader_param/hue = 0.0454545
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bqivv"]
+shader = ExtResource( "4_q0oed" )
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aafpw"]
+shader = ExtResource( "5_jn2xp" )
+
+[node name="Color" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( "1_tmbwj" )
+metadata/_edit_vertical_guides_ = [127.0]
+
+[node name="HSV Picker" type="VBoxContainer" parent="."]
+show_behind_parent = true
+offset_right = 1024.0
+offset_bottom = 572.0
+size_flags_vertical = 3
+script = ExtResource( "2_x34xs" )
+
+[node name="HSV" type="HBoxContainer" parent="HSV Picker"]
+show_behind_parent = true
+offset_right = 1024.0
+offset_bottom = 544.0
+size_flags_vertical = 3
+
+[node name="SV Square" type="ColorRect" parent="HSV Picker/HSV"]
+unique_name_in_owner = true
+material = SubResource( "ShaderMaterial_bo1sq" )
+offset_right = 996.0
+offset_bottom = 544.0
+size_flags_horizontal = 3
+focus_mode = 1
+
+[node name="H Slider" type="ColorRect" parent="HSV Picker/HSV"]
+unique_name_in_owner = true
+material = SubResource( "ShaderMaterial_bqivv" )
+minimum_size = Vector2(24, 0)
+offset_left = 1000.0
+offset_right = 1024.0
+offset_bottom = 544.0
+focus_mode = 1
+
+[node name="A Slider" type="ColorRect" parent="HSV Picker"]
+unique_name_in_owner = true
+show_behind_parent = true
+material = SubResource( "ShaderMaterial_aafpw" )
+minimum_size = Vector2(0, 24)
+offset_top = 548.0
+offset_right = 1024.0
+offset_bottom = 572.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+focus_mode = 1
+color = Color(0.980392, 0.113725, 0.176471, 1)
+
+[node name="Background" type="TextureRect" parent="HSV Picker/A Slider"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( "6_al4vr" )
+ignore_texture_size = true
+stretch_mode = 1
+
+[node name="H" type="HBoxContainer" parent="."]
+offset_top = 576.0
+offset_right = 1024.0
+offset_bottom = 600.0
+
+[node name="ColorPrimary" type="ColorRect" parent="H"]
+minimum_size = Vector2(0, 24)
+offset_right = 510.0
+offset_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="Background" type="TextureRect" parent="H/ColorPrimary"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( "6_al4vr" )
+ignore_texture_size = true
+stretch_mode = 1
+
+[node name="ColorSecondary" type="ColorRect" parent="H"]
+minimum_size = Vector2(0, 24)
+offset_left = 514.0
+offset_right = 1024.0
+offset_bottom = 24.0
+size_flags_horizontal = 3
+color = Color(0.752941, 0.0705882, 0.2, 1)
+
+[node name="Background" type="TextureRect" parent="H/ColorSecondary"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( "6_al4vr" )
+ignore_texture_size = true
+stretch_mode = 1
+
+[connection signal="gui_input" from="HSV Picker/HSV/SV Square" to="HSV Picker" method="_on_sv_square_gui_input"]
+[connection signal="gui_input" from="HSV Picker/HSV/H Slider" to="HSV Picker" method="_on_h_slider_gui_input"]
+[connection signal="gui_input" from="HSV Picker/A Slider" to="HSV Picker" method="_on_a_slider_gui_input"]
+[connection signal="gui_input" from="H/ColorPrimary" to="." method="_on_color_primary_gui_input"]
+[connection signal="gui_input" from="H/ColorSecondary" to="." method="_on_color_secondary_gui_input"]

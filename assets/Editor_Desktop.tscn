@@ -1,0 +1,107 @@
+[gd_scene load_steps=7 format=3 uid="uid://b7dhs0a1hgoeq"]
+
+[ext_resource type="Theme" uid="uid://cjj0tiarqeqxe" path="res://assets/themes/FlatDark.theme" id="1_hvs4j"]
+[ext_resource type="Script" path="res://assets/script/Editor.gd" id="2_8mpkt"]
+[ext_resource type="PackedScene" uid="uid://ci5uuhfmiwus1" path="res://assets/layouts/SpriteEditorTab.tscn" id="3_ah45k"]
+[ext_resource type="Texture2D" uid="uid://c1wl1a7k88od6" path="res://assets/images/icons/1x/outline_auto_awesome_motion_white_24dp.png" id="3_exxlm"]
+[ext_resource type="Texture2D" uid="uid://dsk8am258se6u" path="res://assets/images/icons/1x/tool_brush.png" id="4_28661"]
+[ext_resource type="Texture2D" uid="uid://bir14t176x7th" path="res://assets/images/icons/1x/outline_colorize_white_24dp.png" id="4_pjtar"]
+
+[node name="BaseEditorControl" type="Panel"]
+texture_filter = 1
+clip_contents = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( "1_hvs4j" )
+script = ExtResource( "2_8mpkt" )
+
+[node name="V" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="MenuBar" type="HBoxContainer" parent="V"]
+offset_right = 1024.0
+offset_bottom = 27.0
+
+[node name="Menu_File" type="MenuButton" parent="V/MenuBar"]
+unique_name_in_owner = true
+offset_right = 44.0
+offset_bottom = 27.0
+text = "File"
+alignment = 0
+switch_on_hover = true
+item_count = 4
+popup/item_0/text = "New"
+popup/item_0/id = 0
+popup/item_1/text = "Open..."
+popup/item_1/id = 1
+popup/item_2/text = "Save"
+popup/item_2/id = 2
+popup/item_3/text = "Save As..."
+popup/item_3/id = 3
+
+[node name="Menu_Edit" type="MenuButton" parent="V/MenuBar"]
+unique_name_in_owner = true
+offset_left = 48.0
+offset_right = 95.0
+offset_bottom = 27.0
+text = "Edit"
+alignment = 0
+switch_on_hover = true
+item_count = 3
+popup/item_0/text = "Brushes"
+popup/item_0/id = 0
+popup/item_1/text = ""
+popup/item_1/id = 1
+popup/item_2/text = ""
+popup/item_2/id = 2
+
+[node name="Menu_View" type="MenuButton" parent="V/MenuBar"]
+unique_name_in_owner = true
+offset_left = 99.0
+offset_right = 148.0
+offset_bottom = 27.0
+text = "View"
+alignment = 0
+switch_on_hover = true
+item_count = 3
+popup/item_0/text = "Layers"
+popup/item_0/icon = ExtResource( "3_exxlm" )
+popup/item_0/checkable = 1
+popup/item_0/id = 0
+popup/item_1/text = "Data Picker"
+popup/item_1/icon = ExtResource( "4_pjtar" )
+popup/item_1/checkable = 1
+popup/item_1/id = 1
+popup/item_2/text = "Palette"
+popup/item_2/icon = ExtResource( "4_28661" )
+popup/item_2/checkable = 1
+popup/item_2/id = 2
+
+[node name="Menu_Power" type="MenuButton" parent="V/MenuBar"]
+unique_name_in_owner = true
+offset_left = 152.0
+offset_right = 215.0
+offset_bottom = 27.0
+text = "Power"
+alignment = 0
+switch_on_hover = true
+item_count = 2
+popup/item_0/text = "Run Script"
+popup/item_0/id = 0
+popup/item_1/text = "Effects"
+popup/item_1/id = 1
+
+[node name="FilesTab" type="TabContainer" parent="V"]
+unique_name_in_owner = true
+offset_top = 31.0
+offset_right = 1024.0
+offset_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SpriteEditorTab" parent="V/FilesTab" instance=ExtResource( "3_ah45k" )]
+offset_left = 4.0
+offset_top = 33.0
+offset_right = -4.0
+offset_bottom = -4.0

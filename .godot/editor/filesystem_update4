@@ -1,0 +1,13 @@
+res://addons/VectorShapeNodes/VectorControl.gd
+res://addons/VectorShapeNodes/VectorFill.gd
+res://addons/VectorShapeNodes/VectorHandle.gd
+res://addons/VectorShapeNodes/VectorPath.gd
+res://addons/VectorShapeNodes/VectorPoint.gd
+res://addons/VectorShapeNodes/VectorStroke.gd
+res://addons/cubic_bezier_controls/cubic_bezier_controls_plugin.gd
+res://addons/cubic_bezier_controls/cubic_bezier_curve.gd
+res://addons/native_dialogs/plugin.gd
+res://assets/components/DataPickers/ColorPicker.tscn
+res://assets/layouts/SpriteEditorTab.tscn
+res://demo/tech_test/tech_test_shapes.tscn
+res://demo/tile_map.tscn

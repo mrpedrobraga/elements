@@ -1,0 +1,521 @@
+[gd_scene load_steps=23 format=3 uid="uid://ci5uuhfmiwus1"]
+
+[ext_resource type="Texture2D" uid="uid://drpwb8v0r5ri8" path="res://demo/reference_andy.png" id="2_in3wx"]
+[ext_resource type="Script" path="res://assets/script/SpriteEditorTab.gd" id="2_jo5pk"]
+[ext_resource type="Script" path="res://assets/components/DataPickers/UVPicker.gd" id="3_s0r7c"]
+[ext_resource type="Script" path="res://assets/script/components/_LayerBase.gd" id="3_sv05q"]
+[ext_resource type="Texture2D" uid="uid://dsnbqhy6nrnr4" path="res://assets/images/defaults/sprite_editor_back.png" id="4_2xbet"]
+[ext_resource type="Script" path="res://assets/script/components/LayerTypes/RasterDataLayer.gd" id="4_f53ua"]
+[ext_resource type="Script" path="res://assets/script/components/LayerTypes/GroupLayer.gd" id="5_mc1wm"]
+[ext_resource type="Texture2D" uid="uid://dsk8am258se6u" path="res://assets/images/icons/1x/tool_brush.png" id="6_ad4tr"]
+[ext_resource type="Texture2D" uid="uid://7r0ihab3skow" path="res://assets/images/icons/1x/outline_remove_white_24dp.png" id="7_svpsx"]
+[ext_resource type="PackedScene" uid="uid://bb6nkfh2xpiga" path="res://assets/components/DataPickers/ColorPicker.tscn" id="7_tcwj8"]
+[ext_resource type="Texture2D" uid="uid://bir14t176x7th" path="res://assets/images/icons/1x/outline_colorize_white_24dp.png" id="7_xl2x1"]
+[ext_resource type="PackedScene" uid="uid://4fxkqvdgkjlu" path="res://demo/tile_map.tscn" id="9_y4vqe"]
+[ext_resource type="Texture2D" uid="uid://cvi1qjm0lk2ue" path="res://assets/images/icons/1x/outline_add_white_24dp.png" id="10_v8y7l"]
+[ext_resource type="Theme" uid="uid://cjj0tiarqeqxe" path="res://assets/themes/FlatDark.theme" id="11_mplvg"]
+[ext_resource type="Texture2D" uid="uid://brt2ikp8otord" path="res://assets/images/icons/1x/outline_grade_white_24dp.png" id="11_ypu8t"]
+[ext_resource type="Texture2D" uid="uid://df5rb8vbmkaty" path="res://assets/images/icons/1x/outline_code_white_24dp.png" id="12_ktti7"]
+[ext_resource type="Script" path="res://assets/script/Dock_DOCUMENT.gd" id="13_qxmwj"]
+
+[sub_resource type="GDScript" id="GDScript_ym300"]
+script/source = "extends Polygon2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	polygon[1] = get_local_mouse_position()
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ah2m4"]
+bg_color = Color(0.117647, 0.117647, 0.117647, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gtcr0"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_t162d"]
+viewport_path = NodePath("Render Pipeline/RHLayers/RootLayer")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m7jaj"]
+bg_color = Color(0, 0, 0, 1)
+draw_center = false
+shadow_color = Color(0, 0, 0, 0.227451)
+shadow_size = 24
+
+[node name="SpriteEditorTab" type="Panel"]
+texture_filter = 1
+clip_contents = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+theme = ExtResource( "11_mplvg" )
+script = ExtResource( "2_jo5pk" )
+metadata/_edit_horizontal_guides_ = [-38.0]
+
+[node name="Render Pipeline" type="Node" parent="."]
+
+[node name="RHLayers" type="Node" parent="Render Pipeline"]
+unique_name_in_owner = true
+
+[node name="RootLayer" type="SubViewport" parent="Render Pipeline/RHLayers"]
+transparent_bg = true
+canvas_item_default_texture_filter = 0
+gui_disable_input = true
+size = Vector2i(128, 128)
+render_target_update_mode = 4
+script = ExtResource( "5_mc1wm" )
+display_name = "Root"
+layer_paths = [NodePath("Layer0")]
+
+[node name="Layer1" type="SubViewport" parent="Render Pipeline/RHLayers/RootLayer"]
+transparent_bg = true
+canvas_item_default_texture_filter = 0
+gui_disable_input = true
+size = Vector2i(256, 256)
+render_target_update_mode = 0
+script = ExtResource( "4_f53ua" )
+display_name = "Layer1"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Render Pipeline/RHLayers/RootLayer/Layer1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.83501, 0.598522, 0)
+
+[node name="Layer0" type="SubViewport" parent="Render Pipeline/RHLayers/RootLayer"]
+transparent_bg = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(32, 32)
+render_target_update_mode = 4
+script = ExtResource( "3_sv05q" )
+display_name = "Layer0"
+
+[node name="Polygon2D" type="Polygon2D" parent="Render Pipeline/RHLayers/RootLayer/Layer0"]
+position = Vector2(16, 16)
+polygon = PackedVector2Array(1, 13, -10, -6, 16, -11)
+vertex_colors = PackedColorArray(1, 0.027451, 0.894118, 1, 1, 0.392157, 0, 1, 1, 0.807843, 0, 1)
+script = SubResource( "GDScript_ym300" )
+
+[node name="Layer2" type="SubViewport" parent="Render Pipeline/RHLayers/RootLayer"]
+transparent_bg = true
+size = Vector2i(128, 128)
+render_target_update_mode = 0
+script = ExtResource( "3_sv05q" )
+display_name = "Layer2"
+
+[node name="TileMap" parent="Render Pipeline/RHLayers/RootLayer/Layer2" instance=ExtResource( "9_y4vqe" )]
+
+[node name="RHRoot" type="Node" parent="Render Pipeline"]
+
+[node name="H" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Dock_LEFT" type="Panel" parent="H"]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0.639216)
+minimum_size = Vector2(200, 0)
+offset_right = 200.0
+offset_bottom = 600.0
+theme_override_styles/panel = SubResource( "StyleBoxFlat_ah2m4" )
+
+[node name="V" type="VBoxContainer" parent="H/Dock_LEFT"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Control" type="Control" parent="H/Dock_LEFT/V"]
+offset_right = 200.0
+offset_bottom = 172.0
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="H/Dock_LEFT/V"]
+minimum_size = Vector2(0, 180)
+offset_top = 176.0
+offset_right = 200.0
+offset_bottom = 356.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="H/Dock_LEFT/V/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="H/Dock_LEFT/V/Panel/VBoxContainer"]
+offset_right = 200.0
+offset_bottom = 27.0
+theme_override_font_sizes/font_size = 13
+text = "Tool Properties"
+
+[node name="GridContainer" type="GridContainer" parent="H/Dock_LEFT/V/Panel/VBoxContainer"]
+offset_top = 31.0
+offset_right = 200.0
+offset_bottom = 180.0
+size_flags_vertical = 3
+columns = 2
+
+[node name="Label" type="Label" parent="H/Dock_LEFT/V/Panel/VBoxContainer/GridContainer"]
+offset_right = 45.0
+offset_bottom = 28.0
+text = "Size"
+
+[node name="SpinBox" type="SpinBox" parent="H/Dock_LEFT/V/Panel/VBoxContainer/GridContainer"]
+offset_left = 49.0
+offset_right = 200.0
+offset_bottom = 28.0
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 64.0
+value = 1.0
+suffix = "px"
+
+[node name="Dock_Data" type="TabContainer" parent="H/Dock_LEFT/V"]
+unique_name_in_owner = true
+clip_contents = true
+minimum_size = Vector2(0, 240)
+offset_top = 360.0
+offset_right = 200.0
+offset_bottom = 600.0
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 12
+
+[node name="Sampler" type="TabContainer" parent="H/Dock_LEFT/V/Dock_Data"]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 30.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource( "StyleBoxEmpty_gtcr0" )
+tabs_visible = false
+metadata/_edit_use_custom_anchors = false
+
+[node name="Color" parent="H/Dock_LEFT/V/Dock_Data/Sampler" instance=ExtResource( "7_tcwj8" )]
+sprite_editor_path = NodePath("../../../../../..")
+
+[node name="UV" type="VBoxContainer" parent="H/Dock_LEFT/V/Dock_Data/Sampler"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( "3_s0r7c" )
+
+[node name="Background" type="TextureRect" parent="H/Dock_LEFT/V/Dock_Data/Sampler/UV"]
+offset_right = 192.0
+offset_bottom = 168.0
+size_flags_vertical = 3
+texture = ExtResource( "4_2xbet" )
+stretch_mode = 1
+
+[node name="UVSquare" type="TextureRect" parent="H/Dock_LEFT/V/Dock_Data/Sampler/UV/Background"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+scale = Vector2(4, 4)
+pivot_offset = Vector2(16, 16)
+focus_mode = 1
+texture = ExtResource( "2_in3wx" )
+stretch_mode = 3
+
+[node name="VBoxContainer" type="HBoxContainer" parent="H/Dock_LEFT/V/Dock_Data/Sampler/UV"]
+offset_top = 172.0
+offset_right = 192.0
+offset_bottom = 206.0
+
+[node name="ZoomIn" type="Button" parent="H/Dock_LEFT/V/Dock_Data/Sampler/UV/VBoxContainer"]
+offset_right = 36.0
+offset_bottom = 34.0
+icon = ExtResource( "10_v8y7l" )
+flat = true
+
+[node name="ZoomOut" type="Button" parent="H/Dock_LEFT/V/Dock_Data/Sampler/UV/VBoxContainer"]
+offset_left = 40.0
+offset_right = 76.0
+offset_bottom = 34.0
+icon = ExtResource( "7_svpsx" )
+flat = true
+
+[node name="Patterns" type="TabContainer" parent="H/Dock_LEFT/V/Dock_Data"]
+unique_name_in_owner = true
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 33.0
+offset_right = -4.0
+offset_bottom = -4.0
+
+[node name="V" type="VBoxContainer" parent="H"]
+offset_left = 204.0
+offset_right = 1020.0
+offset_bottom = 600.0
+size_flags_horizontal = 3
+
+[node name="Dock_DOCUMENT" type="SubViewportContainer" parent="H/V"]
+texture_filter = 1
+offset_right = 816.0
+offset_bottom = 596.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+script = ExtResource( "13_qxmwj" )
+canvas_camera_path = NodePath("Canvas_Viewport/CanvasCamera")
+
+[node name="Canvas_Viewport" type="SubViewport" parent="H/V/Dock_DOCUMENT"]
+transparent_bg = true
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+size = Vector2i(816, 596)
+render_target_update_mode = 4
+
+[node name="CanvasCamera" type="Camera2D" parent="H/V/Dock_DOCUMENT/Canvas_Viewport"]
+unique_name_in_owner = true
+current = true
+zoom = Vector2(8, 8)
+limit_left = -2048
+limit_top = -2048
+limit_right = 2048
+limit_bottom = 2048
+editor_draw_limits = true
+
+[node name="Canvas" type="TextureRect" parent="H/V/Dock_DOCUMENT/Canvas_Viewport"]
+unique_name_in_owner = true
+offset_right = 32.0
+offset_bottom = 32.0
+pivot_offset = Vector2(16, 16)
+focus_mode = 1
+texture = SubResource( "ViewportTexture_t162d" )
+ignore_texture_size = true
+metadata/_edit_group_ = true
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = false
+
+[node name="Shadow" type="Panel" parent="H/V/Dock_DOCUMENT/Canvas_Viewport/Canvas"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource( "StyleBoxFlat_m7jaj" )
+metadata/_edit_use_custom_anchors = false
+metadata/_edit_layout_mode = 1
+
+[node name="Checker" type="TextureRect" parent="H/V/Dock_DOCUMENT/Canvas_Viewport/Canvas"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource( "4_2xbet" )
+ignore_texture_size = true
+metadata/_edit_layout_mode = 1
+
+[node name="CL" type="CanvasLayer" parent="H/V/Dock_DOCUMENT/Canvas_Viewport"]
+layer = 2
+
+[node name="Toolbar" type="Panel" parent="H/V/Dock_DOCUMENT/Canvas_Viewport/CL"]
+unique_name_in_owner = true
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -160.0
+offset_bottom = 160.0
+pivot_offset = Vector2(0, 160)
+
+[node name="Shadow" type="Panel" parent="H/V/Dock_DOCUMENT/Canvas_Viewport/CL/Toolbar"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = SubResource( "StyleBoxFlat_m7jaj" )
+
+[node name="V" type="VBoxContainer" parent="H/V/Dock_DOCUMENT/Canvas_Viewport/CL/Toolbar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Btn_Brush" type="Button" parent="H/V/Dock_DOCUMENT/Canvas_Viewport/CL/Toolbar/V"]
+offset_right = 40.0
+offset_bottom = 34.0
+focus_mode = 0
+icon = ExtResource( "6_ad4tr" )
+icon_alignment = 1
+
+[node name="Btn_Eyedropper" type="Button" parent="H/V/Dock_DOCUMENT/Canvas_Viewport/CL/Toolbar/V"]
+offset_top = 38.0
+offset_right = 40.0
+offset_bottom = 72.0
+focus_mode = 0
+icon = ExtResource( "7_xl2x1" )
+icon_alignment = 1
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="H/V/Dock_DOCUMENT/Canvas_Viewport"]
+visible = false
+position = Vector2(113, 132)
+energy = 0.2
+
+[node name="Dock_BOTTOM" type="Panel" parent="H/V"]
+unique_name_in_owner = true
+clip_contents = true
+offset_top = 600.0
+offset_right = 816.0
+offset_bottom = 600.0
+size_flags_stretch_ratio = 0.5
+
+[node name="Dock_RIGHT" type="Panel" parent="H"]
+unique_name_in_owner = true
+offset_left = 1024.0
+offset_right = 1024.0
+offset_bottom = 600.0
+
+[node name="DataSamplerWindow" type="Window" parent="."]
+title = "Data Sampler"
+position = Vector2i(150, 300)
+size = Vector2i(128, 164)
+visible = false
+
+[node name="Dock_Animation" type="Window" parent="."]
+canvas_item_default_texture_filter = 0
+title = "Animation"
+size = Vector2i(320, 200)
+visible = false
+metadata/_edit_use_custom_anchors = true
+
+[node name="Panel" type="Panel" parent="Dock_Animation"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_custom_anchors = false
+
+[node name="V" type="VBoxContainer" parent="Dock_Animation"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="H" type="HBoxContainer" parent="Dock_Animation/V"]
+offset_right = 1024.0
+offset_bottom = 34.0
+
+[node name="Btn_AnimationPlay" type="Button" parent="Dock_Animation/V/H"]
+offset_right = 36.0
+offset_bottom = 34.0
+icon = ExtResource( "10_v8y7l" )
+flat = true
+
+[node name="Btn_AnimationPause" type="Button" parent="Dock_Animation/V/H"]
+offset_left = 40.0
+offset_right = 76.0
+offset_bottom = 34.0
+icon = ExtResource( "11_ypu8t" )
+flat = true
+
+[node name="Btn_AnimationStop" type="Button" parent="Dock_Animation/V/H"]
+offset_left = 80.0
+offset_right = 116.0
+offset_bottom = 34.0
+icon = ExtResource( "12_ktti7" )
+flat = true
+
+[node name="Scroll" type="ScrollContainer" parent="Dock_Animation/V"]
+offset_top = 38.0
+offset_right = 1024.0
+offset_bottom = 600.0
+size_flags_vertical = 3
+
+[node name="H" type="HBoxContainer" parent="Dock_Animation/V/Scroll"]
+offset_right = 84.0
+offset_bottom = 140.0
+
+[node name="AnimationTrackNames" type="VBoxContainer" parent="Dock_Animation/V/Scroll/H"]
+offset_right = 80.0
+offset_bottom = 140.0
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="Dock_Animation/V/Scroll/H/AnimationTrackNames"]
+offset_right = 80.0
+offset_bottom = 28.0
+text = "Layer 1"
+
+[node name="Label2" type="Label" parent="Dock_Animation/V/Scroll/H/AnimationTrackNames"]
+offset_top = 28.0
+offset_right = 80.0
+offset_bottom = 56.0
+text = "Layer 2"
+
+[node name="Label3" type="Label" parent="Dock_Animation/V/Scroll/H/AnimationTrackNames"]
+offset_top = 56.0
+offset_right = 80.0
+offset_bottom = 84.0
+text = "Layer 3"
+
+[node name="Label4" type="Label" parent="Dock_Animation/V/Scroll/H/AnimationTrackNames"]
+offset_top = 84.0
+offset_right = 80.0
+offset_bottom = 112.0
+text = "Layer 4"
+
+[node name="Label5" type="Label" parent="Dock_Animation/V/Scroll/H/AnimationTrackNames"]
+offset_top = 112.0
+offset_right = 80.0
+offset_bottom = 140.0
+text = "Layer 5"
+
+[node name="Scroll" type="ScrollContainer" parent="Dock_Animation/V/Scroll/H"]
+offset_left = 84.0
+offset_right = 84.0
+offset_bottom = 140.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Dock_Animation/V/Scroll/H/Scroll"]
+
+[node name="LayerWindow" type="Window" parent="."]
+title = "Layers"
+position = Vector2i(200, 300)
+size = Vector2i(200, 240)
+visible = false
+transient = true
+min_size = Vector2i(160, 160)
+max_size = Vector2i(320, 600)
+
+[node name="Dock_Layers" type="Panel" parent="LayerWindow"]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_custom_anchors = false
+
+[node name="Items" type="ItemList" parent="LayerWindow/Dock_Layers"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+select_mode = 1
+item_count = 1
+item_0/text = "Layer 0"
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = false
+
+[node name="V" type="VBoxContainer" parent="LayerWindow/Dock_Layers"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="color_picked" from="H/Dock_LEFT/V/Dock_Data/Sampler/Color" to="." method="_on_color_picked"]
+[connection signal="uv_picked" from="H/Dock_LEFT/V/Dock_Data/Sampler/UV" to="." method="_on_uv_picked"]
+[connection signal="gui_input" from="H/Dock_LEFT/V/Dock_Data/Sampler/UV/Background/UVSquare" to="H/Dock_LEFT/V/Dock_Data/Sampler/UV" method="_on_uv_square_gui_input"]
+[connection signal="gui_input" from="H/V/Dock_DOCUMENT" to="H/V/Dock_DOCUMENT" method="_on_dock_document_gui_input"]
+[connection signal="mouse_entered" from="H/V/Dock_DOCUMENT" to="H/V/Dock_DOCUMENT" method="_on_dock_document_mouse_entered"]
+[connection signal="mouse_exited" from="H/V/Dock_DOCUMENT" to="H/V/Dock_DOCUMENT" method="_on_dock_document_mouse_exited"]
+[connection signal="pressed" from="H/V/Dock_DOCUMENT/Canvas_Viewport/CL/Toolbar/V/Btn_Brush" to="." method="set_current_tool" flags=3 binds= ["Brush"]]
+[connection signal="pressed" from="H/V/Dock_DOCUMENT/Canvas_Viewport/CL/Toolbar/V/Btn_Eyedropper" to="." method="set_current_tool" flags=3 binds= ["Eyedropper"]]

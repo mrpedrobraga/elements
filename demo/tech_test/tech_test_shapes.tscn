@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=3 uid="uid://b75ugkl2jswmn"]
+
+[ext_resource type="Texture2D" uid="uid://cwvysne5doora" path="res://icon.png" id="1_dlfd1"]
+[ext_resource type="Script" path="res://addons/VectorShapeNodes/VectorPath.gd" id="2_r22in"]
+
+[sub_resource type="GDScript" id="GDScript_o33w4"]
+script/source = "@tool
+extends Control
+
+func _ready():
+	pass
+
+@export_range(0, TAU) var angle = TAU/8
+@export var color : Color = Color.BLACK
+
+func _process(delta):
+	update()
+
+func _draw():
+	var p2d : Polygon2D = get_node(\"Polygon2D\")
+	var pl = p2d.polygon; pl.push_back(p2d.polygon[0])
+	draw_polyline(pl, color, 1.0, false)
+
+func v(x, y):
+	return Vector2(x, y)
+"
+
+[sub_resource type="Environment" id="Environment_y1o5q"]
+background_mode = 1
+background_color = Color(0.0627451, 0.0627451, 0.0627451, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_igl6e"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+size = Vector2i(64, 64)
+render_target_update_mode = 4
+
+[node name="Control" type="Control" parent="SubViewport"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource( "GDScript_o33w4" )
+angle = 4.193
+metadata/_edit_use_custom_anchors = false
+
+[node name="Polygon2D" type="Polygon2D" parent="SubViewport/Control"]
+visible = false
+show_behind_parent = true
+texture = ExtResource( "1_dlfd1" )
+polygon = PackedVector2Array(10, 28, 24, 27, 36, 7, 60, 24, 23, 61)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1696, 0, 1.85651)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewport"]
+environment = SubResource( "Environment_y1o5q" )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( "ViewportTexture_igl6e" )
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Control" type="Control" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource( "2_r22in" )

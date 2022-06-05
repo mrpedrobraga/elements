@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c428b6sv2suf7"
+path="res://.godot/imported/suzanne.obj-a9382c47a04971e74cf29381d4e30d5f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/suzanne.obj-a9382c47a04971e74cf29381d4e30d5f.mesh"]
+
+source_file="res://demo/tech_test/suzanne.obj"
+dest_files=["res://.godot/imported/suzanne.obj-a9382c47a04971e74cf29381d4e30d5f.mesh", "res://.godot/imported/suzanne.obj-a9382c47a04971e74cf29381d4e30d5f.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
