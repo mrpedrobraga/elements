@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://b7dhs0a1hgoeq"]
 
-[ext_resource type="Theme" uid="uid://cjj0tiarqeqxe" path="res://assets/themes/FlatDark.theme" id="1_hvs4j"]
+[ext_resource type="Theme" uid="uid://cqhbigt0vsdbm" path="res://assets/themes/theme/StarDark.theme" id="1_x0340"]
 [ext_resource type="Script" path="res://assets/script/Editor.gd" id="2_8mpkt"]
 [ext_resource type="PackedScene" uid="uid://ci5uuhfmiwus1" path="res://assets/layouts/SpriteEditorTab.tscn" id="3_ah45k"]
 [ext_resource type="Texture2D" uid="uid://c1wl1a7k88od6" path="res://assets/images/icons/1x/outline_auto_awesome_motion_white_24dp.png" id="3_exxlm"]
@@ -15,7 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource( "1_hvs4j" )
+theme = ExtResource( "1_x0340" )
 script = ExtResource( "2_8mpkt" )
 
 [node name="V" type="VBoxContainer" parent="."]
@@ -24,12 +24,12 @@ anchor_bottom = 1.0
 
 [node name="MenuBar" type="HBoxContainer" parent="V"]
 offset_right = 1024.0
-offset_bottom = 27.0
+offset_bottom = 29.0
 
 [node name="Menu_File" type="MenuButton" parent="V/MenuBar"]
 unique_name_in_owner = true
-offset_right = 44.0
-offset_bottom = 27.0
+offset_right = 45.0
+offset_bottom = 29.0
 text = "File"
 alignment = 0
 switch_on_hover = true
@@ -45,9 +45,9 @@ popup/item_3/id = 3
 
 [node name="Menu_Edit" type="MenuButton" parent="V/MenuBar"]
 unique_name_in_owner = true
-offset_left = 48.0
-offset_right = 95.0
-offset_bottom = 27.0
+offset_left = 49.0
+offset_right = 94.0
+offset_bottom = 29.0
 text = "Edit"
 alignment = 0
 switch_on_hover = true
@@ -61,9 +61,9 @@ popup/item_2/id = 2
 
 [node name="Menu_View" type="MenuButton" parent="V/MenuBar"]
 unique_name_in_owner = true
-offset_left = 99.0
-offset_right = 148.0
-offset_bottom = 27.0
+offset_left = 98.0
+offset_right = 143.0
+offset_bottom = 29.0
 text = "View"
 alignment = 0
 switch_on_hover = true
@@ -83,9 +83,9 @@ popup/item_2/id = 2
 
 [node name="Menu_Power" type="MenuButton" parent="V/MenuBar"]
 unique_name_in_owner = true
-offset_left = 152.0
-offset_right = 215.0
-offset_bottom = 27.0
+offset_left = 147.0
+offset_right = 201.0
+offset_bottom = 29.0
 text = "Power"
 alignment = 0
 switch_on_hover = true
@@ -96,14 +96,14 @@ popup/item_1/text = "Effects"
 popup/item_1/id = 1
 
 [node name="VSeparator" type="VSeparator" parent="V/MenuBar"]
-offset_left = 219.0
-offset_right = 223.0
-offset_bottom = 27.0
+offset_left = 205.0
+offset_right = 209.0
+offset_bottom = 29.0
 
 [node name="TabBar" type="TabBar" parent="V/MenuBar"]
-offset_left = 227.0
+offset_left = 213.0
 offset_right = 1024.0
-offset_bottom = 27.0
+offset_bottom = 29.0
 size_flags_horizontal = 3
 tab_count = 2
 tab_0/title = "Home"
@@ -111,7 +111,7 @@ tab_1/title = "Untitled"
 
 [node name="FilesTab" type="TabContainer" parent="V"]
 unique_name_in_owner = true
-offset_top = 31.0
+offset_top = 33.0
 offset_right = 1024.0
 offset_bottom = 700.0
 size_flags_horizontal = 3
@@ -119,10 +119,10 @@ size_flags_vertical = 3
 tabs_visible = false
 
 [node name="SpriteEditorTab" parent="V/FilesTab" instance=ExtResource( "3_ah45k" )]
-offset_left = 4.0
-offset_top = 6.0
-offset_right = -4.0
-offset_bottom = -4.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
 
 [node name="Panel" type="Panel" parent="V/FilesTab"]
 visible = false
@@ -140,9 +140,9 @@ anchor_bottom = 1.0
 [node name="V" type="VBoxContainer" parent="V/FilesTab/Panel/CenterContainer"]
 minimum_size = Vector2(256, 256)
 offset_left = 380.0
-offset_top = 192.0
+offset_top = 191.0
 offset_right = 636.0
-offset_bottom = 466.0
+offset_bottom = 465.0
 
 [node name="Label" type="Label" parent="V/FilesTab/Panel/CenterContainer/V"]
 offset_right = 256.0

@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://bir14t176x7th" path="res://assets/images/icons/1x/outline_colorize_white_24dp.png" id="7_xl2x1"]
 [ext_resource type="PackedScene" uid="uid://4fxkqvdgkjlu" path="res://demo/tile_map.tscn" id="9_y4vqe"]
 [ext_resource type="Texture2D" uid="uid://cvi1qjm0lk2ue" path="res://assets/images/icons/1x/outline_add_white_24dp.png" id="10_v8y7l"]
-[ext_resource type="Theme" uid="uid://cjj0tiarqeqxe" path="res://assets/themes/FlatDark.theme" id="11_mplvg"]
 [ext_resource type="Texture2D" uid="uid://brt2ikp8otord" path="res://assets/images/icons/1x/outline_grade_white_24dp.png" id="11_ypu8t"]
 [ext_resource type="Texture2D" uid="uid://df5rb8vbmkaty" path="res://assets/images/icons/1x/outline_code_white_24dp.png" id="12_ktti7"]
 [ext_resource type="Script" path="res://assets/script/Dock_DOCUMENT.gd" id="13_qxmwj"]
@@ -37,6 +36,9 @@ func _process(delta):
 bg_color = Color(0.117647, 0.117647, 0.117647, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gtcr0"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_hf21u"]
+viewport_path = NodePath("Render Pipeline/RHLayers/RootLayer/Layer2")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m7jaj"]
 bg_color = Color(0, 0, 0, 1)
@@ -74,7 +76,6 @@ anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
-theme = ExtResource( "11_mplvg" )
 script = ExtResource( "2_jo5pk" )
 metadata/_edit_horizontal_guides_ = [-38.0]
 
@@ -91,7 +92,7 @@ size = Vector2i(128, 128)
 render_target_update_mode = 4
 script = ExtResource( "5_mc1wm" )
 display_name = "Root"
-layer_paths = [NodePath("Layer0")]
+layer_paths = [NodePath("Layer2")]
 
 [node name="Layer1" type="SubViewport" parent="Render Pipeline/RHLayers/RootLayer"]
 transparent_bg = true
@@ -122,7 +123,7 @@ script = SubResource( "GDScript_ym300" )
 [node name="Layer2" type="SubViewport" parent="Render Pipeline/RHLayers/RootLayer"]
 transparent_bg = true
 size = Vector2i(128, 128)
-render_target_update_mode = 0
+render_target_update_mode = 4
 script = ExtResource( "3_sv05q" )
 display_name = "Layer2"
 
@@ -297,7 +298,7 @@ size_flags_horizontal = 3
 [node name="Dock_DOCUMENT" type="SubViewportContainer" parent="H/V"]
 texture_filter = 1
 offset_right = 816.0
-offset_bottom = 496.0
+offset_bottom = 700.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
@@ -308,7 +309,7 @@ canvas_camera_path = NodePath("Canvas_Viewport/CanvasCamera")
 transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
-size = Vector2i(816, 496)
+size = Vector2i(816, 700)
 render_target_update_mode = 4
 
 [node name="CanvasCamera" type="Camera2D" parent="H/V/Dock_DOCUMENT/Canvas_Viewport"]
@@ -327,6 +328,7 @@ offset_right = 32.0
 offset_bottom = 32.0
 pivot_offset = Vector2(16, 16)
 focus_mode = 1
+texture = SubResource( "ViewportTexture_hf21u" )
 ignore_texture_size = true
 metadata/_edit_group_ = true
 metadata/_edit_layout_mode = 1
@@ -398,6 +400,7 @@ energy = 0.2
 
 [node name="Dock_BOTTOM" type="Panel" parent="H/V"]
 unique_name_in_owner = true
+visible = false
 clip_contents = true
 minimum_size = Vector2(0, 200)
 offset_top = 500.0
