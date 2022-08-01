@@ -9,6 +9,11 @@
 config_version=5
 
 _global_script_classes=[{
+"base": "Resource",
+"class": &"BrushPreset",
+"language": &"GDScript",
+"path": "res://assets/script/components/BrushType.gd"
+}, {
 "base": "EditingTool",
 "class": &"BrushTool",
 "language": &"GDScript",
@@ -23,6 +28,16 @@ _global_script_classes=[{
 "class": &"CubicBezierCurve",
 "language": &"GDScript",
 "path": "res://addons/cubic_bezier_controls/cubic_bezier_curve.gd"
+}, {
+"base": "GraphNode",
+"class": &"DataGraphNode",
+"language": &"GDScript",
+"path": "res://assets/script/editor_components/DataGraphNode.gd"
+}, {
+"base": "RefCounted",
+"class": &"DataRef",
+"language": &"GDScript",
+"path": "res://assets/script/DataRef.gd"
 }, {
 "base": "Node",
 "class": &"EditingTool",
@@ -69,10 +84,45 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://addons/SpriteStack/SpriteStack.gd"
 }, {
+"base": "DataRef",
+"class": &"StringRef",
+"language": &"GDScript",
+"path": "res://assets/script/editor_components/DataRefTypes/StringRef.gd"
+}, {
 "base": "Control",
 "class": &"UVPickerControl",
 "language": &"GDScript",
 "path": "res://assets/components/DataPickers/UVPicker.gd"
+}, {
+"base": "DataRef",
+"class": &"Vector2Ref",
+"language": &"GDScript",
+"path": "res://assets/script/editor_components/DataRefTypes/Vector2Ref.gd"
+}, {
+"base": "DataRef",
+"class": &"Vector2iRef",
+"language": &"GDScript",
+"path": "res://assets/script/editor_components/DataRefTypes/Vector2iRef.gd"
+}, {
+"base": "DataRef",
+"class": &"Vector3Ref",
+"language": &"GDScript",
+"path": "res://assets/script/editor_components/DataRefTypes/Vector3Ref.gd"
+}, {
+"base": "DataRef",
+"class": &"Vector3iRef",
+"language": &"GDScript",
+"path": "res://assets/script/editor_components/DataRefTypes/Vector3iRef.gd"
+}, {
+"base": "DataRef",
+"class": &"Vector4Ref",
+"language": &"GDScript",
+"path": "res://assets/script/editor_components/DataRefTypes/Vector4Ref.gd"
+}, {
+"base": "DataRef",
+"class": &"Vector4iRef",
+"language": &"GDScript",
+"path": "res://assets/script/editor_components/DataRefTypes/Vector4iRef.gd"
 }, {
 "base": "CollisionPolygon2D",
 "class": &"VectorCollisionPolygon",
@@ -110,9 +160,12 @@ _global_script_classes=[{
 "path": "res://addons/VectorShapeNodes/VectorStroke.gd"
 }]
 _global_script_class_icons={
+"BrushPreset": "",
 "BrushTool": "",
 "ColorPickerControl": "",
 "CubicBezierCurve": "",
+"DataGraphNode": "",
+"DataRef": "",
 "EditingTool": "",
 "EyedropperTool": "",
 "GroupLayer": "",
@@ -122,7 +175,14 @@ _global_script_class_icons={
 "RasterDataLayer": "",
 "SpriteEditor": "",
 "SpriteStackModel": "",
+"StringRef": "",
 "UVPickerControl": "",
+"Vector2Ref": "",
+"Vector2iRef": "",
+"Vector3Ref": "",
+"Vector3iRef": "",
+"Vector4Ref": "",
+"Vector4iRef": "",
 "VectorCollisionPolygon": "",
 "VectorControl": "",
 "VectorFill": "",
@@ -136,18 +196,13 @@ _global_script_class_icons={
 
 config/name="Elements Pixel Art"
 run/main_scene="res://assets/Editor_Desktop.tscn"
+config/features=PackedStringArray("4.0")
 boot_splash/use_filter=false
 config/icon="res://icon.png"
-config/features=PackedStringArray("4.0")
 
 [display]
 
 window/size/viewport_height=700
-window/subwindows/embed_subwindows=false
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/VoxImporter/plugin.cfg")
 
 [gui]
 

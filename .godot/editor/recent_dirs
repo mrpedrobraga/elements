@@ -1,6 +1,11 @@
+/home/pedrobraga/Dev/Universal Suite/Elements Pixel Art/demo/tech_test
+/bin
+res://assets/script/components/
+res://assets/components
+res://assets
+/home/pedrobraga/Dev/Universal Suite/Elements Pixel Art/assets/themes/theme
 res://demo
 res://assets/script
-res://assets/components
 res://assets/shaders
 /home/pedrobraga/Dev/Games/BUILDS
 res://assets/images/icons/1x
@@ -9,4 +14,3 @@ res://assets/components/DataPickers
 res://assets/shaders/editor
 res://assets/themes
 res://assets/layouts
-res://assets

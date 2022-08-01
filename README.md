@@ -148,7 +148,7 @@ Addons are easy to write, share and use...
 
 # Closing Notes
 
-Elements is the first project of a planned suit intended to empower people to make their dreams giving them all the power they will ever need in a simple, friendly, comfortable user interface.
+Elements is the first project of a programs suite intended to empower people to make their dreams giving them all the power they will ever need in a simple, friendly, comfortable user interface.
 
 Together we can destroy the industry of super-expensive predatory software and unleash our creativity.
 

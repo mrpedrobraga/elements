@@ -2,8 +2,7 @@ extends SubViewportContainer
 
 ########## CANVAS VIEW MANIPULATION ##########
 
-@export var canvas_camera_path : NodePath
-@onready var canvas_camera = get_node(canvas_camera_path)
+@export var canvas_camera : Camera2D
 var mouse_over := false
 var lmouse_down := false
 var scroll_down := false
@@ -20,7 +19,6 @@ func _on_dock_document_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == 3:
 			scroll_down = event.pressed
-			print("Scroll Wheel Toggled")
 			if event.pressed:
 				old_mouse_pos = event.position
 				old_camera_pos = canvas_camera.position

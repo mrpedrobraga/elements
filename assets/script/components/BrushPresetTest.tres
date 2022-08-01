@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://c5fwdecjl36do"]
+
+[ext_resource type="Script" path="res://assets/script/components/BrushType.gd" id="1_hqvw1"]
+
+[resource]
+script = ExtResource("1_hqvw1")
+name = "New Brush"
+does_modulate = true
+copy_mode = null
+blend_mode = 0
+size_reacts_to_pressure = false
+opacity_reacts_to_pressure = null

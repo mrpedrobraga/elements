@@ -1,6 +1,7 @@
 @tool
 extends SubViewport
-class_name Layer, "res://assets/images/icons/1x/outline_auto_awesome_motion_white_24dp.png"
+class_name Layer
+@icon("res://assets/images/icons/1x/outline_auto_awesome_motion_white_24dp.png")
 
 # The layer's name, as displayed in the Layer Dock
 @export var display_name := "Unkwown Layer"
@@ -32,6 +33,7 @@ func get_type():
 # but isn't the layer's actual type.
 func get_effective_type():
 	return get_type()
+
 
 func _to_string():
 	return "Unknown Layer"

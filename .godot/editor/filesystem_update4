@@ -1,1 +1,4 @@
+res://assets/layouts/SpriteEditorTab.tscn
+res://assets/script/editor_components/DataGraphNode.gd
 res://assets/Editor_Desktop.tscn
+res://demo/tech_test/GraphEdit.gd

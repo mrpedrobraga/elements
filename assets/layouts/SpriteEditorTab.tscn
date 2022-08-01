@@ -1,11 +1,13 @@
-[gd_scene load_steps=24 format=3 uid="uid://ci5uuhfmiwus1"]
+[gd_scene load_steps=31 format=3 uid="uid://ci5uuhfmiwus1"]
 
+[ext_resource type="Theme" uid="uid://cqhbigt0vsdbm" path="res://assets/themes/theme/StarDark.theme" id="1_8cyu6"]
 [ext_resource type="Texture2D" uid="uid://drpwb8v0r5ri8" path="res://demo/reference_andy.png" id="2_in3wx"]
 [ext_resource type="Script" path="res://assets/script/SpriteEditorTab.gd" id="2_jo5pk"]
 [ext_resource type="Script" path="res://assets/components/DataPickers/UVPicker.gd" id="3_s0r7c"]
 [ext_resource type="Script" path="res://assets/script/components/_LayerBase.gd" id="3_sv05q"]
 [ext_resource type="Texture2D" uid="uid://dsnbqhy6nrnr4" path="res://assets/images/defaults/sprite_editor_back.png" id="4_2xbet"]
 [ext_resource type="Script" path="res://assets/script/components/LayerTypes/RasterDataLayer.gd" id="4_f53ua"]
+[ext_resource type="Texture2D" uid="uid://exaaiu3442j4" path="res://demo/Starfall City.png" id="5_2c24b"]
 [ext_resource type="Script" path="res://assets/script/components/LayerTypes/GroupLayer.gd" id="5_mc1wm"]
 [ext_resource type="Texture2D" uid="uid://dsk8am258se6u" path="res://assets/images/icons/1x/tool_brush.png" id="6_ad4tr"]
 [ext_resource type="Texture2D" uid="uid://bkj3jyaxknayi" path="res://demo/chroma-quirk-palette.png" id="7_hkcf0"]
@@ -17,6 +19,9 @@
 [ext_resource type="Texture2D" uid="uid://brt2ikp8otord" path="res://assets/images/icons/1x/outline_grade_white_24dp.png" id="11_ypu8t"]
 [ext_resource type="Texture2D" uid="uid://df5rb8vbmkaty" path="res://assets/images/icons/1x/outline_code_white_24dp.png" id="12_ktti7"]
 [ext_resource type="Script" path="res://assets/script/Dock_DOCUMENT.gd" id="13_qxmwj"]
+[ext_resource type="Script" path="res://assets/script/editor_components/DataGraphNode.gd" id="17_4ogf5"]
+[ext_resource type="Script" path="res://demo/tech_test/GraphEdit.gd" id="18_ukw07"]
+[ext_resource type="PackedScene" uid="uid://b3ynnkajb623p" path="res://assets/components/LayerControl.tscn" id="19_6rnt1"]
 
 [sub_resource type="GDScript" id="GDScript_ym300"]
 script/source = "extends Polygon2D
@@ -36,15 +41,6 @@ func _process(delta):
 bg_color = Color(0.117647, 0.117647, 0.117647, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gtcr0"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_hf21u"]
-viewport_path = NodePath("Render Pipeline/RHLayers/RootLayer/Layer2")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m7jaj"]
-bg_color = Color(0, 0, 0, 1)
-draw_center = false
-shadow_color = Color(0, 0, 0, 0.227451)
-shadow_size = 24
 
 [sub_resource type="GDScript" id="GDScript_x5jik"]
 script/source = "extends Tree
@@ -68,15 +64,37 @@ func create_item_quick(parent:TreeItem, text:String) -> TreeItem :
 	return item
 "
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_pj8qr"]
+viewport_path = NodePath("Render Pipeline/RHLayers/RootLayer")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m7jaj"]
+bg_color = Color(0, 0, 0, 1)
+draw_center = false
+shadow_color = Color(0, 0, 0, 0.227451)
+shadow_size = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mnbbo"]
+bg_color = Color(0, 0, 0, 1)
+draw_center = false
+shadow_color = Color(0, 0, 0, 0.227451)
+shadow_size = 24
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_kh61p"]
+viewport_path = NodePath("Render Pipeline/RHLayers/RootLayer")
+
 [node name="SpriteEditorTab" type="Panel"]
 texture_filter = 1
 clip_contents = true
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
-script = ExtResource( "2_jo5pk" )
+theme = ExtResource("1_8cyu6")
+script = ExtResource("2_jo5pk")
+canvas_size = Vector2i(31, 32)
 metadata/_edit_horizontal_guides_ = [-38.0]
 
 [node name="Render Pipeline" type="Node" parent="."]
@@ -88,11 +106,11 @@ unique_name_in_owner = true
 transparent_bg = true
 canvas_item_default_texture_filter = 0
 gui_disable_input = true
-size = Vector2i(128, 128)
+size = Vector2i(800, 480)
 render_target_update_mode = 4
-script = ExtResource( "5_mc1wm" )
+script = ExtResource("5_mc1wm")
 display_name = "Root"
-layer_paths = [NodePath("Layer2")]
+layer_paths = [NodePath("Layer0")]
 
 [node name="Layer1" type="SubViewport" parent="Render Pipeline/RHLayers/RootLayer"]
 transparent_bg = true
@@ -100,7 +118,7 @@ canvas_item_default_texture_filter = 0
 gui_disable_input = true
 size = Vector2i(256, 256)
 render_target_update_mode = 0
-script = ExtResource( "4_f53ua" )
+script = ExtResource("4_f53ua")
 display_name = "Layer1"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Render Pipeline/RHLayers/RootLayer/Layer1"]
@@ -109,25 +127,35 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.83501, 0.598522, 0)
 [node name="Layer0" type="SubViewport" parent="Render Pipeline/RHLayers/RootLayer"]
 transparent_bg = true
 canvas_item_default_texture_filter = 0
-size = Vector2i(32, 32)
+size = Vector2i(800, 480)
 render_target_update_mode = 4
-script = ExtResource( "3_sv05q" )
+script = ExtResource("3_sv05q")
 display_name = "Layer0"
 
+[node name="TextureRect" type="TextureRect" parent="Render Pipeline/RHLayers/RootLayer/Layer0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_2c24b")
+ignore_texture_size = true
+stretch_mode = 5
+
 [node name="Polygon2D" type="Polygon2D" parent="Render Pipeline/RHLayers/RootLayer/Layer0"]
+visible = false
 position = Vector2(16, 16)
 polygon = PackedVector2Array(1, 13, -10, -6, 16, -11)
 vertex_colors = PackedColorArray(1, 0.027451, 0.894118, 1, 1, 0.392157, 0, 1, 1, 0.807843, 0, 1)
-script = SubResource( "GDScript_ym300" )
+script = SubResource("GDScript_ym300")
 
 [node name="Layer2" type="SubViewport" parent="Render Pipeline/RHLayers/RootLayer"]
 transparent_bg = true
 size = Vector2i(128, 128)
 render_target_update_mode = 4
-script = ExtResource( "3_sv05q" )
+script = ExtResource("3_sv05q")
 display_name = "Layer2"
 
-[node name="TileMap" parent="Render Pipeline/RHLayers/RootLayer/Layer2" instance=ExtResource( "9_y4vqe" )]
+[node name="TileMap" parent="Render Pipeline/RHLayers/RootLayer/Layer2" instance=ExtResource("9_y4vqe")]
 
 [node name="RHRoot" type="Node" parent="Render Pipeline"]
 
@@ -140,63 +168,63 @@ size_flags_vertical = 3
 [node name="Dock_LEFT" type="Panel" parent="H"]
 unique_name_in_owner = true
 self_modulate = Color(1, 1, 1, 0.639216)
-minimum_size = Vector2(200, 0)
-offset_right = 200.0
+custom_minimum_size = Vector2(132, 0)
+offset_right = 132.0
 offset_bottom = 700.0
-theme_override_styles/panel = SubResource( "StyleBoxFlat_ah2m4" )
+theme_override_styles/panel = SubResource("StyleBoxFlat_ah2m4")
 
 [node name="V" type="VBoxContainer" parent="H/Dock_LEFT"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Label" type="Label" parent="H/Dock_LEFT/V"]
-offset_right = 200.0
-offset_bottom = 28.0
+offset_right = 132.0
+offset_bottom = 20.0
 text = "Palette"
 
-[node name="Control" type="Control" parent="H/Dock_LEFT/V"]
-minimum_size = Vector2(0, 200)
-offset_top = 32.0
-offset_right = 200.0
-offset_bottom = 232.0
+[node name="Palette" type="Panel" parent="H/Dock_LEFT/V"]
+custom_minimum_size = Vector2(0, 128)
+offset_top = 24.0
+offset_right = 132.0
+offset_bottom = 152.0
+theme_type_variation = &"darker"
 
-[node name="TextureRect" type="TextureRect" parent="H/Dock_LEFT/V/Control"]
-minimum_size = Vector2(0, 157)
+[node name="TextureRect" type="TextureRect" parent="H/Dock_LEFT/V/Palette"]
 anchor_right = 1.0
-offset_bottom = 11.0
-texture = ExtResource( "7_hkcf0" )
+anchor_bottom = 1.0
+texture = ExtResource("7_hkcf0")
 stretch_mode = 5
 
 [node name="Panel" type="TabContainer" parent="H/Dock_LEFT/V"]
-minimum_size = Vector2(0, 180)
-offset_top = 236.0
-offset_right = 200.0
-offset_bottom = 456.0
+offset_top = 156.0
+offset_right = 132.0
+offset_bottom = 536.0
 size_flags_vertical = 3
 
 [node name="Tool" type="VBoxContainer" parent="H/Dock_LEFT/V/Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 33.0
-offset_right = -4.0
-offset_bottom = -4.0
+offset_left = 8.0
+offset_top = 41.0
+offset_right = -8.0
+offset_bottom = -8.0
 
 [node name="GridContainer" type="GridContainer" parent="H/Dock_LEFT/V/Panel/Tool"]
-offset_right = 192.0
-offset_bottom = 183.0
+offset_right = 116.0
+offset_bottom = 331.0
 size_flags_vertical = 3
 columns = 2
 
 [node name="Label" type="Label" parent="H/Dock_LEFT/V/Panel/Tool/GridContainer"]
-offset_right = 45.0
-offset_bottom = 28.0
+offset_top = 6.0
+offset_right = 37.0
+offset_bottom = 26.0
 text = "Size"
 
 [node name="SpinBox" type="SpinBox" parent="H/Dock_LEFT/V/Panel/Tool/GridContainer"]
-offset_left = 49.0
-offset_right = 192.0
-offset_bottom = 28.0
+offset_left = 41.0
+offset_right = 116.0
+offset_bottom = 33.0
 size_flags_horizontal = 3
 min_value = 1.0
 max_value = 64.0
@@ -206,9 +234,9 @@ suffix = "px"
 [node name="Dock_Data" type="TabContainer" parent="H/Dock_LEFT/V"]
 unique_name_in_owner = true
 clip_contents = true
-minimum_size = Vector2(0, 240)
-offset_top = 460.0
-offset_right = 200.0
+custom_minimum_size = Vector2(0, 160)
+offset_top = 540.0
+offset_right = 132.0
 offset_bottom = 700.0
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 12
@@ -217,18 +245,18 @@ theme_override_font_sizes/font_size = 12
 unique_name_in_owner = true
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 30.0
-offset_right = -4.0
-offset_bottom = -4.0
+offset_left = 8.0
+offset_top = 38.0
+offset_right = -8.0
+offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
-theme_override_styles/panel = SubResource( "StyleBoxEmpty_gtcr0" )
+theme_override_styles/panel = SubResource("StyleBoxEmpty_gtcr0")
 tabs_visible = false
 metadata/_edit_use_custom_anchors = false
 
-[node name="Color" parent="H/Dock_LEFT/V/Dock_Data/Sampler" instance=ExtResource( "7_tcwj8" )]
+[node name="Color" parent="H/Dock_LEFT/V/Dock_Data/Sampler" instance=ExtResource("7_tcwj8")]
 sprite_editor_path = NodePath("../../../../../..")
 
 [node name="UV" type="VBoxContainer" parent="H/Dock_LEFT/V/Dock_Data/Sampler"]
@@ -237,13 +265,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource( "3_s0r7c" )
+script = ExtResource("3_s0r7c")
 
 [node name="Background" type="TextureRect" parent="H/Dock_LEFT/V/Dock_Data/Sampler/UV"]
 offset_right = 192.0
 offset_bottom = 168.0
 size_flags_vertical = 3
-texture = ExtResource( "4_2xbet" )
+texture = ExtResource("4_2xbet")
 stretch_mode = 1
 
 [node name="UVSquare" type="TextureRect" parent="H/Dock_LEFT/V/Dock_Data/Sampler/UV/Background"]
@@ -258,7 +286,7 @@ offset_bottom = 16.0
 scale = Vector2(4, 4)
 pivot_offset = Vector2(16, 16)
 focus_mode = 1
-texture = ExtResource( "2_in3wx" )
+texture = ExtResource("2_in3wx")
 stretch_mode = 3
 
 [node name="VBoxContainer" type="HBoxContainer" parent="H/Dock_LEFT/V/Dock_Data/Sampler/UV"]
@@ -269,14 +297,14 @@ offset_bottom = 206.0
 [node name="ZoomIn" type="Button" parent="H/Dock_LEFT/V/Dock_Data/Sampler/UV/VBoxContainer"]
 offset_right = 36.0
 offset_bottom = 34.0
-icon = ExtResource( "10_v8y7l" )
+icon = ExtResource("10_v8y7l")
 flat = true
 
 [node name="ZoomOut" type="Button" parent="H/Dock_LEFT/V/Dock_Data/Sampler/UV/VBoxContainer"]
 offset_left = 40.0
 offset_right = 76.0
 offset_bottom = 34.0
-icon = ExtResource( "7_svpsx" )
+icon = ExtResource("7_svpsx")
 flat = true
 
 [node name="Patterns" type="TabContainer" parent="H/Dock_LEFT/V/Dock_Data"]
@@ -284,35 +312,46 @@ unique_name_in_owner = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 33.0
-offset_right = -4.0
-offset_bottom = -4.0
+offset_top = 25.0
 
-[node name="V" type="VBoxContainer" parent="H"]
-offset_left = 204.0
+[node name="Workspace" type="Tree" parent="H/Dock_LEFT/V"]
+visible = false
+offset_top = 515.0
+offset_right = 132.0
+offset_bottom = 700.0
+size_flags_vertical = 3
+allow_rmb_select = true
+hide_root = true
+select_mode = 2
+script = SubResource("GDScript_x5jik")
+
+[node name="V" type="VSplitContainer" parent="H"]
+offset_left = 136.0
 offset_right = 1020.0
 offset_bottom = 700.0
 size_flags_horizontal = 3
 
-[node name="Dock_DOCUMENT" type="SubViewportContainer" parent="H/V"]
+[node name="Dock_DOCUMENT" type="SubViewportContainer" parent="H/V" node_paths=PackedStringArray("canvas_camera")]
 texture_filter = 1
-offset_right = 816.0
-offset_bottom = 700.0
+offset_right = 884.0
+offset_bottom = 344.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
-script = ExtResource( "13_qxmwj" )
-canvas_camera_path = NodePath("Canvas_Viewport/CanvasCamera")
+script = ExtResource("13_qxmwj")
+canvas_camera = NodePath("SubViewport/World/CanvasCamera")
 
-[node name="Canvas_Viewport" type="SubViewport" parent="H/V/Dock_DOCUMENT"]
+[node name="SubViewport" type="SubViewport" parent="H/V/Dock_DOCUMENT"]
 transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
-size = Vector2i(816, 700)
+size = Vector2i(884, 344)
+size_2d_override_stretch = true
 render_target_update_mode = 4
 
-[node name="CanvasCamera" type="Camera2D" parent="H/V/Dock_DOCUMENT/Canvas_Viewport"]
+[node name="World" type="Node2D" parent="H/V/Dock_DOCUMENT/SubViewport"]
+
+[node name="CanvasCamera" type="Camera2D" parent="H/V/Dock_DOCUMENT/SubViewport/World"]
 unique_name_in_owner = true
 current = true
 zoom = Vector2(8, 8)
@@ -320,45 +359,122 @@ limit_left = -2048
 limit_top = -2048
 limit_right = 2048
 limit_bottom = 2048
+limit_smoothed = true
 editor_draw_limits = true
 
-[node name="Canvas" type="TextureRect" parent="H/V/Dock_DOCUMENT/Canvas_Viewport"]
+[node name="Canvas" type="TextureRect" parent="H/V/Dock_DOCUMENT/SubViewport/World"]
 unique_name_in_owner = true
-offset_right = 32.0
-offset_bottom = 32.0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
 pivot_offset = Vector2(16, 16)
 focus_mode = 1
-texture = SubResource( "ViewportTexture_hf21u" )
+texture = SubResource("ViewportTexture_pj8qr")
 ignore_texture_size = true
-metadata/_edit_group_ = true
+stretch_mode = 5
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Shadow" type="Panel" parent="H/V/Dock_DOCUMENT/Canvas_Viewport/Canvas"]
+[node name="Shadow" type="Panel" parent="H/V/Dock_DOCUMENT/SubViewport/World/Canvas"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource( "StyleBoxFlat_m7jaj" )
+theme_override_styles/panel = SubResource("StyleBoxFlat_m7jaj")
 metadata/_edit_use_custom_anchors = false
 metadata/_edit_layout_mode = 1
 
-[node name="Checker" type="TextureRect" parent="H/V/Dock_DOCUMENT/Canvas_Viewport/Canvas"]
+[node name="Checker" type="TextureRect" parent="H/V/Dock_DOCUMENT/SubViewport/World/Canvas"]
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource( "4_2xbet" )
+texture = ExtResource("4_2xbet")
 ignore_texture_size = true
 metadata/_edit_layout_mode = 1
 
-[node name="CL" type="CanvasLayer" parent="H/V/Dock_DOCUMENT/Canvas_Viewport"]
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="H/V/Dock_DOCUMENT/SubViewport/World"]
+visible = false
+position = Vector2(21, -26)
+energy = 0.2
+
+[node name="Graph" type="VBoxContainer" parent="H/V"]
+offset_top = 356.0
+offset_right = 884.0
+offset_bottom = 700.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GraphEdit" type="GraphEdit" parent="H/V/Graph"]
+offset_right = 884.0
+offset_bottom = 344.0
+size_flags_vertical = 3
+right_disconnects = true
+minimap_enabled = false
+script = ExtResource("18_ukw07")
+
+[node name="Float" type="GraphNode" parent="H/V/Graph/GraphEdit"]
+offset_left = 140.0
+offset_top = 135.0
+offset_right = 336.0
+offset_bottom = 222.0
+mouse_filter = 1
+title = "Float"
+position_offset = Vector2(140, 135)
+show_close = true
+slot/0/left_enabled = true
+slot/0/left_type = 3
+slot/0/left_color = Color(0, 0.552941, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = true
+slot/0/right_type = 3
+slot/0/right_color = Color(0, 0.552941, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+script = ExtResource("17_4ogf5")
+
+[node name="SpinBox" type="SpinBox" parent="H/V/Graph/GraphEdit/Float"]
+offset_left = 18.0
+offset_top = 42.0
+offset_right = 178.0
+offset_bottom = 75.0
+
+[node name="String" type="GraphNode" parent="H/V/Graph/GraphEdit"]
+offset_left = 430.0
+offset_top = 82.0
+offset_right = 626.0
+offset_bottom = 169.0
+mouse_filter = 1
+title = "String"
+position_offset = Vector2(430, 82)
+show_close = true
+slot/0/left_enabled = true
+slot/0/left_type = 3
+slot/0/left_color = Color(1, 0.72549, 0.141176, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = true
+slot/0/right_type = 3
+slot/0/right_color = Color(1, 0.72549, 0.141176, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+script = ExtResource("17_4ogf5")
+
+[node name="SpinBox" type="LineEdit" parent="H/V/Graph/GraphEdit/String"]
+offset_left = 18.0
+offset_top = 42.0
+offset_right = 178.0
+offset_bottom = 75.0
+placeholder_text = "String"
+
+[node name="CL" type="CanvasLayer" parent="H/V"]
 layer = 2
 
-[node name="Toolbar" type="Panel" parent="H/V/Dock_DOCUMENT/Canvas_Viewport/CL"]
+[node name="Toolbar" type="Panel" parent="H/V/CL"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 0)
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -368,43 +484,38 @@ offset_top = -160.0
 offset_bottom = 160.0
 pivot_offset = Vector2(0, 160)
 
-[node name="Shadow" type="Panel" parent="H/V/Dock_DOCUMENT/Canvas_Viewport/CL/Toolbar"]
+[node name="Shadow" type="Panel" parent="H/V/CL/Toolbar"]
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme_override_styles/panel = SubResource( "StyleBoxFlat_m7jaj" )
+theme_override_styles/panel = SubResource("StyleBoxFlat_mnbbo")
 
-[node name="V" type="VBoxContainer" parent="H/V/Dock_DOCUMENT/Canvas_Viewport/CL/Toolbar"]
+[node name="V" type="VBoxContainer" parent="H/V/CL/Toolbar"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Btn_Brush" type="Button" parent="H/V/Dock_DOCUMENT/Canvas_Viewport/CL/Toolbar/V"]
+[node name="Btn_Brush" type="Button" parent="H/V/CL/Toolbar/V"]
 offset_right = 40.0
-offset_bottom = 34.0
+offset_bottom = 32.0
 focus_mode = 0
-icon = ExtResource( "6_ad4tr" )
+icon = ExtResource("6_ad4tr")
 icon_alignment = 1
 
-[node name="Btn_Eyedropper" type="Button" parent="H/V/Dock_DOCUMENT/Canvas_Viewport/CL/Toolbar/V"]
-offset_top = 38.0
+[node name="Btn_Eyedropper" type="Button" parent="H/V/CL/Toolbar/V"]
+offset_top = 36.0
 offset_right = 40.0
-offset_bottom = 72.0
+offset_bottom = 68.0
 focus_mode = 0
-icon = ExtResource( "7_xl2x1" )
+icon = ExtResource("7_xl2x1")
 icon_alignment = 1
-
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="H/V/Dock_DOCUMENT/Canvas_Viewport"]
-visible = false
-position = Vector2(113, 132)
-energy = 0.2
 
 [node name="Dock_BOTTOM" type="Panel" parent="H/V"]
 unique_name_in_owner = true
 visible = false
 clip_contents = true
-minimum_size = Vector2(0, 200)
-offset_top = 500.0
-offset_right = 816.0
+custom_minimum_size = Vector2(0, 320)
+offset_top = 380.0
+offset_right = 884.0
 offset_bottom = 700.0
 size_flags_stretch_ratio = 0.5
 
@@ -413,27 +524,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="TabContainer" type="TabContainer" parent="H/V/Dock_BOTTOM/V"]
-offset_right = 816.0
-offset_bottom = 169.0
+offset_right = 884.0
+offset_bottom = 291.0
 size_flags_vertical = 3
 tabs_visible = false
 
-[node name="Workspace" type="Tree" parent="H/V/Dock_BOTTOM/V/TabContainer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 6.0
-offset_right = -4.0
-offset_bottom = -4.0
-allow_rmb_select = true
-hide_root = true
-select_mode = 2
-script = SubResource( "GDScript_x5jik" )
-
 [node name="TabBar" type="TabBar" parent="H/V/Dock_BOTTOM/V"]
-offset_top = 173.0
-offset_right = 816.0
-offset_bottom = 200.0
+offset_top = 295.0
+offset_right = 884.0
+offset_bottom = 320.0
 tab_count = 2
 tab_0/title = "Animation"
 tab_1/title = "Workspace"
@@ -470,76 +569,76 @@ anchor_bottom = 1.0
 
 [node name="H" type="HBoxContainer" parent="Dock_Animation/V"]
 offset_right = 1024.0
-offset_bottom = 34.0
+offset_bottom = 40.0
 
 [node name="Btn_AnimationPlay" type="Button" parent="Dock_Animation/V/H"]
-offset_right = 36.0
-offset_bottom = 34.0
-icon = ExtResource( "10_v8y7l" )
+offset_right = 40.0
+offset_bottom = 40.0
+icon = ExtResource("10_v8y7l")
 flat = true
 
 [node name="Btn_AnimationPause" type="Button" parent="Dock_Animation/V/H"]
-offset_left = 40.0
-offset_right = 76.0
-offset_bottom = 34.0
-icon = ExtResource( "11_ypu8t" )
+offset_left = 44.0
+offset_right = 84.0
+offset_bottom = 40.0
+icon = ExtResource("11_ypu8t")
 flat = true
 
 [node name="Btn_AnimationStop" type="Button" parent="Dock_Animation/V/H"]
-offset_left = 80.0
-offset_right = 116.0
-offset_bottom = 34.0
-icon = ExtResource( "12_ktti7" )
+offset_left = 88.0
+offset_right = 128.0
+offset_bottom = 40.0
+icon = ExtResource("12_ktti7")
 flat = true
 
 [node name="Scroll" type="ScrollContainer" parent="Dock_Animation/V"]
-offset_top = 38.0
+offset_top = 44.0
 offset_right = 1024.0
-offset_bottom = 600.0
+offset_bottom = 700.0
 size_flags_vertical = 3
 
 [node name="H" type="HBoxContainer" parent="Dock_Animation/V/Scroll"]
-offset_right = 84.0
-offset_bottom = 140.0
+offset_right = 76.0
+offset_bottom = 100.0
 
 [node name="AnimationTrackNames" type="VBoxContainer" parent="Dock_Animation/V/Scroll/H"]
-offset_right = 80.0
-offset_bottom = 140.0
+offset_right = 72.0
+offset_bottom = 100.0
 theme_override_constants/separation = 0
 
 [node name="Label" type="Label" parent="Dock_Animation/V/Scroll/H/AnimationTrackNames"]
-offset_right = 80.0
-offset_bottom = 28.0
+offset_right = 72.0
+offset_bottom = 20.0
 text = "Layer 1"
 
 [node name="Label2" type="Label" parent="Dock_Animation/V/Scroll/H/AnimationTrackNames"]
-offset_top = 28.0
-offset_right = 80.0
-offset_bottom = 56.0
+offset_top = 20.0
+offset_right = 72.0
+offset_bottom = 40.0
 text = "Layer 2"
 
 [node name="Label3" type="Label" parent="Dock_Animation/V/Scroll/H/AnimationTrackNames"]
-offset_top = 56.0
-offset_right = 80.0
-offset_bottom = 84.0
+offset_top = 40.0
+offset_right = 72.0
+offset_bottom = 60.0
 text = "Layer 3"
 
 [node name="Label4" type="Label" parent="Dock_Animation/V/Scroll/H/AnimationTrackNames"]
-offset_top = 84.0
-offset_right = 80.0
-offset_bottom = 112.0
+offset_top = 60.0
+offset_right = 72.0
+offset_bottom = 80.0
 text = "Layer 4"
 
 [node name="Label5" type="Label" parent="Dock_Animation/V/Scroll/H/AnimationTrackNames"]
-offset_top = 112.0
-offset_right = 80.0
-offset_bottom = 140.0
+offset_top = 80.0
+offset_right = 72.0
+offset_bottom = 100.0
 text = "Layer 5"
 
 [node name="Scroll" type="ScrollContainer" parent="Dock_Animation/V/Scroll/H"]
-offset_left = 84.0
-offset_right = 84.0
-offset_bottom = 140.0
+offset_left = 76.0
+offset_right = 76.0
+offset_bottom = 100.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Dock_Animation/V/Scroll/H/Scroll"]
 
@@ -560,20 +659,32 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_custom_anchors = false
 
-[node name="Items" type="ItemList" parent="LayerWindow/Dock_Layers"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-select_mode = 1
-item_count = 1
-item_0/text = "Layer 0"
-metadata/_edit_layout_mode = 1
-metadata/_edit_use_custom_anchors = false
-
 [node name="V" type="VBoxContainer" parent="LayerWindow/Dock_Layers"]
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="LayerControl" parent="LayerWindow/Dock_Layers/V" node_paths=PackedStringArray("control_layer") instance=ExtResource("19_6rnt1")]
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 182.0
+offset_bottom = 32.0
+control_layer = NodePath("../../../../Render Pipeline/RHLayers/RootLayer")
+
+[node name="BtnVisible" parent="LayerWindow/Dock_Layers/V/LayerControl" index="0"]
+offset_bottom = 32.0
+
+[node name="Preview" parent="LayerWindow/Dock_Layers/V/LayerControl" index="1"]
+offset_top = 0.0
+offset_bottom = 32.0
+texture = SubResource("ViewportTexture_kh61p")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="NameLbl" parent="LayerWindow/Dock_Layers/V/LayerControl" index="2"]
+offset_top = 6.0
+offset_right = 182.0
+offset_bottom = 26.0
+text = "Root Layer"
 
 [connection signal="color_picked" from="H/Dock_LEFT/V/Dock_Data/Sampler/Color" to="." method="_on_color_picked"]
 [connection signal="uv_picked" from="H/Dock_LEFT/V/Dock_Data/Sampler/UV" to="." method="_on_uv_picked"]
@@ -581,5 +692,10 @@ offset_bottom = 40.0
 [connection signal="gui_input" from="H/V/Dock_DOCUMENT" to="H/V/Dock_DOCUMENT" method="_on_dock_document_gui_input"]
 [connection signal="mouse_entered" from="H/V/Dock_DOCUMENT" to="H/V/Dock_DOCUMENT" method="_on_dock_document_mouse_entered"]
 [connection signal="mouse_exited" from="H/V/Dock_DOCUMENT" to="H/V/Dock_DOCUMENT" method="_on_dock_document_mouse_exited"]
-[connection signal="pressed" from="H/V/Dock_DOCUMENT/Canvas_Viewport/CL/Toolbar/V/Btn_Brush" to="." method="set_current_tool" flags=3 binds= ["Brush"]]
-[connection signal="pressed" from="H/V/Dock_DOCUMENT/Canvas_Viewport/CL/Toolbar/V/Btn_Eyedropper" to="." method="set_current_tool" flags=3 binds= ["Eyedropper"]]
+[connection signal="connection_request" from="H/V/Graph/GraphEdit" to="H/V/Graph/GraphEdit" method="_on_graph_edit_connection_request"]
+[connection signal="disconnection_request" from="H/V/Graph/GraphEdit" to="H/V/Graph/GraphEdit" method="_on_disconnection_request"]
+[connection signal="value_changed" from="H/V/Graph/GraphEdit/Float/SpinBox" to="H/V/Graph/GraphEdit/Float" method="_on_value_changed" binds= [0]]
+[connection signal="pressed" from="H/V/CL/Toolbar/V/Btn_Brush" to="." method="set_current_tool" flags=3 binds= ["Brush"]]
+[connection signal="pressed" from="H/V/CL/Toolbar/V/Btn_Eyedropper" to="." method="set_current_tool" flags=3 binds= ["Eyedropper"]]
+
+[editable path="LayerWindow/Dock_Layers/V/LayerControl"]

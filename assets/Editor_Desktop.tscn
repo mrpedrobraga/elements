@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b7dhs0a1hgoeq"]
+[gd_scene load_steps=9 format=3 uid="uid://b7dhs0a1hgoeq"]
 
 [ext_resource type="Theme" uid="uid://cqhbigt0vsdbm" path="res://assets/themes/theme/StarDark.theme" id="1_x0340"]
 [ext_resource type="Script" path="res://assets/script/Editor.gd" id="2_8mpkt"]
@@ -8,6 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://bir14t176x7th" path="res://assets/images/icons/1x/outline_colorize_white_24dp.png" id="4_pjtar"]
 [ext_resource type="Texture2D" uid="uid://drpwb8v0r5ri8" path="res://demo/reference_andy.png" id="6_4dpe2"]
 
+[sub_resource type="GDScript" id="GDScript_0kgxc"]
+script/source = "extends TabContainer
+
+func _on_tab_bar_tab_changed(tab):
+	current_tab = tab
+"
+
 [node name="BaseEditorControl" type="Panel"]
 texture_filter = 1
 clip_contents = true
@@ -15,8 +22,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource( "1_x0340" )
-script = ExtResource( "2_8mpkt" )
+theme = ExtResource("1_x0340")
+script = ExtResource("2_8mpkt")
 
 [node name="V" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -28,7 +35,7 @@ offset_bottom = 29.0
 
 [node name="Menu_File" type="MenuButton" parent="V/MenuBar"]
 unique_name_in_owner = true
-offset_right = 45.0
+offset_right = 44.0
 offset_bottom = 29.0
 text = "File"
 alignment = 0
@@ -45,8 +52,8 @@ popup/item_3/id = 3
 
 [node name="Menu_Edit" type="MenuButton" parent="V/MenuBar"]
 unique_name_in_owner = true
-offset_left = 49.0
-offset_right = 94.0
+offset_left = 48.0
+offset_right = 95.0
 offset_bottom = 29.0
 text = "Edit"
 alignment = 0
@@ -61,30 +68,30 @@ popup/item_2/id = 2
 
 [node name="Menu_View" type="MenuButton" parent="V/MenuBar"]
 unique_name_in_owner = true
-offset_left = 98.0
-offset_right = 143.0
+offset_left = 99.0
+offset_right = 148.0
 offset_bottom = 29.0
 text = "View"
 alignment = 0
 switch_on_hover = true
 item_count = 3
 popup/item_0/text = "Layers"
-popup/item_0/icon = ExtResource( "3_exxlm" )
+popup/item_0/icon = ExtResource("3_exxlm")
 popup/item_0/checkable = 1
 popup/item_0/id = 0
 popup/item_1/text = "Data Picker"
-popup/item_1/icon = ExtResource( "4_pjtar" )
+popup/item_1/icon = ExtResource("4_pjtar")
 popup/item_1/checkable = 1
 popup/item_1/id = 1
 popup/item_2/text = "Palette"
-popup/item_2/icon = ExtResource( "4_28661" )
+popup/item_2/icon = ExtResource("4_28661")
 popup/item_2/checkable = 1
 popup/item_2/id = 2
 
 [node name="Menu_Power" type="MenuButton" parent="V/MenuBar"]
 unique_name_in_owner = true
-offset_left = 147.0
-offset_right = 201.0
+offset_left = 152.0
+offset_right = 215.0
 offset_bottom = 29.0
 text = "Power"
 alignment = 0
@@ -96,12 +103,12 @@ popup/item_1/text = "Effects"
 popup/item_1/id = 1
 
 [node name="VSeparator" type="VSeparator" parent="V/MenuBar"]
-offset_left = 205.0
-offset_right = 209.0
+offset_left = 219.0
+offset_right = 223.0
 offset_bottom = 29.0
 
 [node name="TabBar" type="TabBar" parent="V/MenuBar"]
-offset_left = 213.0
+offset_left = 227.0
 offset_right = 1024.0
 offset_bottom = 29.0
 size_flags_horizontal = 3
@@ -117,59 +124,60 @@ offset_bottom = 700.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 tabs_visible = false
+script = SubResource("GDScript_0kgxc")
 
-[node name="SpriteEditorTab" parent="V/FilesTab" instance=ExtResource( "3_ah45k" )]
+[node name="Main" type="Panel" parent="V/FilesTab"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = -8.0
 offset_bottom = -8.0
 
-[node name="Panel" type="Panel" parent="V/FilesTab"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 6.0
-offset_right = -4.0
-offset_bottom = -4.0
-
-[node name="CenterContainer" type="CenterContainer" parent="V/FilesTab/Panel"]
+[node name="CenterContainer" type="CenterContainer" parent="V/FilesTab/Main"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="V" type="VBoxContainer" parent="V/FilesTab/Panel/CenterContainer"]
-minimum_size = Vector2(256, 256)
-offset_left = 380.0
-offset_top = 191.0
-offset_right = 636.0
-offset_bottom = 465.0
+[node name="V" type="VBoxContainer" parent="V/FilesTab/Main/CenterContainer"]
+offset_left = 412.0
+offset_top = 279.0
+offset_right = 603.0
+offset_bottom = 377.0
 
-[node name="Label" type="Label" parent="V/FilesTab/Panel/CenterContainer/V"]
-offset_right = 256.0
-offset_bottom = 28.0
+[node name="Label" type="Label" parent="V/FilesTab/Main/CenterContainer/V"]
+offset_right = 172.0
+offset_bottom = 26.0
 text = "Welcome to Elements!"
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="V/FilesTab/Panel/CenterContainer/V"]
-minimum_size = Vector2(0, 200)
-offset_top = 32.0
-offset_right = 256.0
-offset_bottom = 232.0
-texture = ExtResource( "6_4dpe2" )
+[node name="TextureRect" type="TextureRect" parent="V/FilesTab/Main/CenterContainer/V"]
+offset_top = 30.0
+offset_right = 172.0
+offset_bottom = 62.0
+texture = ExtResource("6_4dpe2")
 stretch_mode = 5
 
-[node name="BtnCreateNew" type="LinkButton" parent="V/FilesTab/Panel/CenterContainer/V"]
+[node name="BtnCreateNew" type="LinkButton" parent="V/FilesTab/Main/CenterContainer/V"]
 self_modulate = Color(0, 0.666667, 1, 1)
-offset_top = 236.0
-offset_right = 256.0
-offset_bottom = 253.0
+offset_top = 66.0
+offset_right = 172.0
+offset_bottom = 89.0
 text = "- Create new Layout"
 underline = 1
 
-[node name="BtnLoad" type="LinkButton" parent="V/FilesTab/Panel/CenterContainer/V"]
+[node name="BtnLoad" type="LinkButton" parent="V/FilesTab/Main/CenterContainer/V"]
 self_modulate = Color(0, 0.666667, 1, 1)
-offset_top = 257.0
-offset_right = 256.0
-offset_bottom = 274.0
+offset_top = 93.0
+offset_right = 172.0
+offset_bottom = 116.0
 text = "- Load File"
 underline = 1
+
+[node name="SpriteEditorTab" parent="V/FilesTab" instance=ExtResource("3_ah45k")]
+visible = false
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+
+[connection signal="tab_changed" from="V/MenuBar/TabBar" to="V/FilesTab" method="_on_tab_bar_tab_changed"]

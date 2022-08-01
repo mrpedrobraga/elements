@@ -2,7 +2,7 @@
 extends Node
 class_name EditingTool
 
-# A refernce to the current sprite editor!
+# A reference to the current sprite editor!
 var sprite_editor : SpriteEditor
 
 # Information about the currently edited layer
