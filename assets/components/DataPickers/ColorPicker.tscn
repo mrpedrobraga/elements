@@ -26,21 +26,21 @@ metadata/_edit_vertical_guides_ = [127.0]
 [node name="HSV Picker" type="VBoxContainer" parent="."]
 show_behind_parent = true
 offset_right = 1024.0
-offset_bottom = 696.0
+offset_bottom = 664.0
 size_flags_vertical = 3
 script = ExtResource("2_x34xs")
 
 [node name="HSV" type="HBoxContainer" parent="HSV Picker"]
 show_behind_parent = true
 offset_right = 1024.0
-offset_bottom = 668.0
+offset_bottom = 636.0
 size_flags_vertical = 3
 
 [node name="SV Square" type="ColorRect" parent="HSV Picker/HSV"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_bo1sq")
 offset_right = 996.0
-offset_bottom = 668.0
+offset_bottom = 636.0
 size_flags_horizontal = 3
 focus_mode = 1
 
@@ -50,7 +50,7 @@ material = SubResource("ShaderMaterial_bqivv")
 custom_minimum_size = Vector2(24, 0)
 offset_left = 1000.0
 offset_right = 1024.0
-offset_bottom = 668.0
+offset_bottom = 636.0
 focus_mode = 1
 
 [node name="A Slider" type="ColorRect" parent="HSV Picker"]
@@ -58,9 +58,9 @@ unique_name_in_owner = true
 show_behind_parent = true
 material = SubResource("ShaderMaterial_aafpw")
 custom_minimum_size = Vector2(0, 24)
-offset_top = 672.0
+offset_top = 640.0
 offset_right = 1024.0
-offset_bottom = 696.0
+offset_bottom = 664.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
 focus_mode = 1
@@ -75,12 +75,14 @@ ignore_texture_size = true
 stretch_mode = 1
 
 [node name="H" type="HBoxContainer" parent="."]
-offset_top = 700.0
+custom_minimum_size = Vector2(0, 32)
+offset_top = 668.0
 offset_right = 1024.0
 offset_bottom = 700.0
 
 [node name="ColorPrimary" type="ColorRect" parent="H"]
 offset_right = 510.0
+offset_bottom = 32.0
 size_flags_horizontal = 3
 
 [node name="Background" type="TextureRect" parent="H/ColorPrimary"]
@@ -94,6 +96,7 @@ stretch_mode = 1
 [node name="ColorSecondary" type="ColorRect" parent="H"]
 offset_left = 514.0
 offset_right = 1024.0
+offset_bottom = 32.0
 size_flags_horizontal = 3
 color = Color(0.752941, 0.0705882, 0.2, 1)
 

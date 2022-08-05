@@ -206,7 +206,7 @@ window/size/viewport_height=700
 
 [gui]
 
-theme/custom="res://assets/themes/FlatDark.theme"
+theme/custom="res://assets/themes/theme/StarDark.theme"
 
 [input]
 

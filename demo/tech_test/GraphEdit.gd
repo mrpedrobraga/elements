@@ -5,14 +5,16 @@ func _ready():
 
 func _on_graph_edit_connection_request(from, from_slot, to, to_slot):
 	connect_node(from, from_slot, to, to_slot)
-	print(from, to)
+	var a = get_node(from)
+	var b = get_node(to)
+	
+	# Connects the DataRef to the TO graph node!
+	b.ref_connect(a.get_value(from_slot), to_slot)
 
 func _on_disconnection_request(from, from_slot, to, to_slot):
 	disconnect_node(from, from_slot, to, to_slot)
-	print(from, to)
 
 func setup_type_connections() -> void:
-
 	# Connect types to themselves
 
 	for i in engine_types:
@@ -43,6 +45,18 @@ func setup_type_connections() -> void:
 	add_valid_connection_type(TYPE_INT, TYPE_VECTOR2I)
 	add_valid_connection_type(TYPE_INT, TYPE_VECTOR3I)
 	add_valid_connection_type(TYPE_INT, TYPE_VECTOR4I)
+
+	# Int vectors can be cast into floats
+	add_valid_connection_type(TYPE_INT, TYPE_FLOAT)
+	add_valid_connection_type(TYPE_VECTOR2I, TYPE_VECTOR2)
+	add_valid_connection_type(TYPE_VECTOR3I, TYPE_VECTOR3)
+	add_valid_connection_type(TYPE_VECTOR4I, TYPE_VECTOR4)
+	
+	# Float vectors can be cast into a Color
+	add_valid_connection_type(TYPE_FLOAT, TYPE_COLOR)
+	add_valid_connection_type(TYPE_VECTOR2I, TYPE_COLOR)
+	add_valid_connection_type(TYPE_VECTOR3I, TYPE_COLOR)
+	add_valid_connection_type(TYPE_VECTOR4I, TYPE_COLOR)
 
 	# Colors can be cast as textures!
 	add_valid_connection_type(TYPE_COLOR, DataTypes.TYPE_TEXTURE)

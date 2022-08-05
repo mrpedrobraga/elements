@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxnpgr8xo82bv"]
+
+[ext_resource type="Script" path="res://assets/script/editor_components/DataGraphNode.gd" id="1_55pig"]
+[ext_resource type="Script" path="res://assets/script/editor_components/BooleanButton.gd" id="2_1lqjy"]
+
+[node name="Bool" type="GraphNode"]
+offset_right = 119.0
+offset_bottom = 73.0
+mouse_filter = 1
+title = "Bool"
+position_offset = Vector2(45, 330)
+show_close = true
+slot/0/left_enabled = true
+slot/0/left_type = 1
+slot/0/left_color = Color(0.121569, 1, 0.376471, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = true
+slot/0/right_type = 1
+slot/0/right_color = Color(0.121569, 1, 0.376471, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+script = ExtResource("1_55pig")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 16.0
+offset_top = 32.0
+offset_right = 103.0
+offset_bottom = 65.0
+theme_type_variation = &"BooleanButton"
+toggle_mode = true
+text = "False"
+script = ExtResource("2_1lqjy")
+
+[connection signal="toggled" from="Button" to="." method="_on_value_changed"]
+[connection signal="toggled" from="Button" to="Button" method="_on_toggled"]

@@ -1,12 +1,17 @@
-LineEdit
+OptionButton
+Label
+Button
+CheckButton
 TextEdit
+ColorPickerButton
+ColorPicker
+HSlider
+LineEdit
 SpinBox
 VSplitContainer
 GraphEdit
 VBoxContainer
 TextureRect
-CheckButton
-Label
 HBoxContainer
 Node2D
 SubViewport
@@ -26,8 +31,3 @@ WorldEnvironment
 MeshInstance3D
 Layer (_LayerBase.gd)
 TileMap
-CanvasLayer
-Camera2D
-DirectionalLight3D
-Camera3D
-MeshInstance2D

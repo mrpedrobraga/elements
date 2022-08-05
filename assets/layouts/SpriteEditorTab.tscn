@@ -19,7 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://brt2ikp8otord" path="res://assets/images/icons/1x/outline_grade_white_24dp.png" id="11_ypu8t"]
 [ext_resource type="Texture2D" uid="uid://df5rb8vbmkaty" path="res://assets/images/icons/1x/outline_code_white_24dp.png" id="12_ktti7"]
 [ext_resource type="Script" path="res://assets/script/Dock_DOCUMENT.gd" id="13_qxmwj"]
-[ext_resource type="Script" path="res://assets/script/editor_components/DataGraphNode.gd" id="17_4ogf5"]
+[ext_resource type="PackedScene" uid="uid://q8b1i8kdsojv" path="res://assets/components/RenderGraphNodes/FloatNode.tscn" id="17_8rqux"]
+[ext_resource type="Script" path="res://assets/script/editor_components/DataGraphNode.gd" id="18_mosbq"]
 [ext_resource type="Script" path="res://demo/tech_test/GraphEdit.gd" id="18_ukw07"]
 [ext_resource type="PackedScene" uid="uid://b3ynnkajb623p" path="res://assets/components/LayerControl.tscn" id="19_6rnt1"]
 
@@ -63,9 +64,6 @@ func create_item_quick(parent:TreeItem, text:String) -> TreeItem :
 	item.set_text(0, text)
 	return item
 "
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_pj8qr"]
-viewport_path = NodePath("Render Pipeline/RHLayers/RootLayer")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m7jaj"]
 bg_color = Color(0, 0, 0, 1)
@@ -330,11 +328,12 @@ offset_left = 136.0
 offset_right = 1020.0
 offset_bottom = 700.0
 size_flags_horizontal = 3
+split_offset = -128
 
 [node name="Dock_DOCUMENT" type="SubViewportContainer" parent="H/V" node_paths=PackedStringArray("canvas_camera")]
 texture_filter = 1
 offset_right = 884.0
-offset_bottom = 344.0
+offset_bottom = 216.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
@@ -345,7 +344,7 @@ canvas_camera = NodePath("SubViewport/World/CanvasCamera")
 transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
-size = Vector2i(884, 344)
+size = Vector2i(884, 216)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 
@@ -370,7 +369,6 @@ offset_right = 16.0
 offset_bottom = 16.0
 pivot_offset = Vector2(16, 16)
 focus_mode = 1
-texture = SubResource("ViewportTexture_pj8qr")
 ignore_texture_size = true
 stretch_mode = 5
 metadata/_edit_layout_mode = 1
@@ -402,7 +400,7 @@ position = Vector2(21, -26)
 energy = 0.2
 
 [node name="Graph" type="VBoxContainer" parent="H/V"]
-offset_top = 356.0
+offset_top = 228.0
 offset_right = 884.0
 offset_bottom = 700.0
 size_flags_horizontal = 3
@@ -410,64 +408,108 @@ size_flags_vertical = 3
 
 [node name="GraphEdit" type="GraphEdit" parent="H/V/Graph"]
 offset_right = 884.0
-offset_bottom = 344.0
+offset_bottom = 472.0
 size_flags_vertical = 3
 right_disconnects = true
 minimap_enabled = false
 script = ExtResource("18_ukw07")
 
-[node name="Float" type="GraphNode" parent="H/V/Graph/GraphEdit"]
+[node name="Float" parent="H/V/Graph/GraphEdit" instance=ExtResource("17_8rqux")]
 offset_left = 140.0
 offset_top = 135.0
-offset_right = 336.0
-offset_bottom = 222.0
+offset_right = 268.0
+offset_bottom = 208.0
+
+[node name="Float2" parent="H/V/Graph/GraphEdit" instance=ExtResource("17_8rqux")]
+offset_left = 87.0
+offset_top = 251.0
+offset_right = 215.0
+offset_bottom = 324.0
+position_offset = Vector2(87, 251)
+
+[node name="Float3" parent="H/V/Graph/GraphEdit" instance=ExtResource("17_8rqux")]
+offset_left = 560.0
+offset_top = 202.0
+offset_right = 688.0
+offset_bottom = 275.0
+position_offset = Vector2(560, 202)
+
+[node name="Arithmetic" type="GraphNode" parent="H/V/Graph/GraphEdit"]
+offset_left = 327.0
+offset_top = 178.0
+offset_right = 499.0
+offset_bottom = 316.0
 mouse_filter = 1
-title = "Float"
-position_offset = Vector2(140, 135)
+title = "Arithmetic"
+position_offset = Vector2(327, 178)
 show_close = true
 slot/0/left_enabled = true
 slot/0/left_type = 3
 slot/0/left_color = Color(0, 0.552941, 1, 1)
 slot/0/left_icon = null
-slot/0/right_enabled = true
+slot/0/right_enabled = false
 slot/0/right_type = 3
 slot/0/right_color = Color(0, 0.552941, 1, 1)
 slot/0/right_icon = null
 slot/0/draw_stylebox = true
-script = ExtResource("17_4ogf5")
+slot/1/left_enabled = true
+slot/1/left_type = 3
+slot/1/left_color = Color(0, 0.552941, 1, 1)
+slot/1/left_icon = null
+slot/1/right_enabled = false
+slot/1/right_type = 0
+slot/1/right_color = Color(1, 1, 1, 1)
+slot/1/right_icon = null
+slot/1/draw_stylebox = true
+slot/2/left_enabled = false
+slot/2/left_type = 4
+slot/2/left_color = Color(1, 0.72549, 0.141176, 1)
+slot/2/left_icon = null
+slot/2/right_enabled = true
+slot/2/right_type = 3
+slot/2/right_color = Color(0, 0.552941, 1, 1)
+slot/2/right_icon = null
+slot/2/draw_stylebox = true
+script = ExtResource("18_mosbq")
+value_defaults = [2.0, 2.0, 4.0]
 
-[node name="SpinBox" type="SpinBox" parent="H/V/Graph/GraphEdit/Float"]
-offset_left = 18.0
-offset_top = 42.0
-offset_right = 178.0
-offset_bottom = 75.0
+[node name="SpinBox" type="SpinBox" parent="H/V/Graph/GraphEdit/Arithmetic"]
+offset_left = 16.0
+offset_top = 32.0
+offset_right = 156.0
+offset_bottom = 65.0
+step = 0.1
+value = 5.0
+allow_greater = true
+allow_lesser = true
+editable = false
 
-[node name="String" type="GraphNode" parent="H/V/Graph/GraphEdit"]
-offset_left = 430.0
-offset_top = 82.0
-offset_right = 626.0
-offset_bottom = 169.0
-mouse_filter = 1
-title = "String"
-position_offset = Vector2(430, 82)
-show_close = true
-slot/0/left_enabled = true
-slot/0/left_type = 3
-slot/0/left_color = Color(1, 0.72549, 0.141176, 1)
-slot/0/left_icon = null
-slot/0/right_enabled = true
-slot/0/right_type = 3
-slot/0/right_color = Color(1, 0.72549, 0.141176, 1)
-slot/0/right_icon = null
-slot/0/draw_stylebox = true
-script = ExtResource("17_4ogf5")
+[node name="SpinBox2" type="SpinBox" parent="H/V/Graph/GraphEdit/Arithmetic"]
+offset_left = 16.0
+offset_top = 67.0
+offset_right = 156.0
+offset_bottom = 100.0
+step = 0.1
+value = 6.0
+allow_greater = true
+allow_lesser = true
+editable = false
 
-[node name="SpinBox" type="LineEdit" parent="H/V/Graph/GraphEdit/String"]
-offset_left = 18.0
-offset_top = 42.0
-offset_right = 178.0
-offset_bottom = 75.0
-placeholder_text = "String"
+[node name="OptionButton" type="OptionButton" parent="H/V/Graph/GraphEdit/Arithmetic"]
+offset_left = 16.0
+offset_top = 102.0
+offset_right = 156.0
+offset_bottom = 135.0
+item_count = 4
+selected = 0
+popup/item_0/text = "Add"
+popup/item_0/id = 0
+popup/item_1/text = "Subtract"
+popup/item_1/id = 1
+popup/item_2/text = "Multiply"
+popup/item_2/id = 2
+popup/item_3/text = "Divide"
+popup/item_3/id = 3
 
 [node name="CL" type="CanvasLayer" parent="H/V"]
 layer = 2
@@ -496,15 +538,15 @@ anchor_bottom = 1.0
 
 [node name="Btn_Brush" type="Button" parent="H/V/CL/Toolbar/V"]
 offset_right = 40.0
-offset_bottom = 32.0
+offset_bottom = 40.0
 focus_mode = 0
 icon = ExtResource("6_ad4tr")
 icon_alignment = 1
 
 [node name="Btn_Eyedropper" type="Button" parent="H/V/CL/Toolbar/V"]
-offset_top = 36.0
+offset_top = 44.0
 offset_right = 40.0
-offset_bottom = 68.0
+offset_bottom = 84.0
 focus_mode = 0
 icon = ExtResource("7_xl2x1")
 icon_alignment = 1
@@ -694,7 +736,8 @@ text = "Root Layer"
 [connection signal="mouse_exited" from="H/V/Dock_DOCUMENT" to="H/V/Dock_DOCUMENT" method="_on_dock_document_mouse_exited"]
 [connection signal="connection_request" from="H/V/Graph/GraphEdit" to="H/V/Graph/GraphEdit" method="_on_graph_edit_connection_request"]
 [connection signal="disconnection_request" from="H/V/Graph/GraphEdit" to="H/V/Graph/GraphEdit" method="_on_disconnection_request"]
-[connection signal="value_changed" from="H/V/Graph/GraphEdit/Float/SpinBox" to="H/V/Graph/GraphEdit/Float" method="_on_value_changed" binds= [0]]
+[connection signal="value_changed" from="H/V/Graph/GraphEdit/Arithmetic/SpinBox" to="H/V/Graph/GraphEdit/Arithmetic" method="_on_value_changed" binds= [0]]
+[connection signal="value_changed" from="H/V/Graph/GraphEdit/Arithmetic/SpinBox2" to="H/V/Graph/GraphEdit/Arithmetic" method="_on_value_changed" binds= [1]]
 [connection signal="pressed" from="H/V/CL/Toolbar/V/Btn_Brush" to="." method="set_current_tool" flags=3 binds= ["Brush"]]
 [connection signal="pressed" from="H/V/CL/Toolbar/V/Btn_Eyedropper" to="." method="set_current_tool" flags=3 binds= ["Eyedropper"]]
 

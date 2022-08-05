@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://qy8adrfsnug5"]
+
+[ext_resource type="Script" path="res://assets/script/editor_components/DataGraphNode.gd" id="1_irpcj"]
+
+[node name="LongString" type="GraphNode"]
+offset_right = 207.0
+offset_bottom = 143.0
+mouse_filter = 1
+title = "String"
+position_offset = Vector2(340, 238)
+show_close = true
+resizable = true
+slot/0/left_enabled = true
+slot/0/left_type = 4
+slot/0/left_color = Color(1, 0.72549, 0.141176, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = true
+slot/0/right_type = 4
+slot/0/right_color = Color(1, 0.72549, 0.141176, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+script = ExtResource("1_irpcj")
+
+[node name="Text" type="TextEdit" parent="."]
+offset_left = 18.0
+offset_top = 42.0
+offset_right = 189.0
+offset_bottom = 131.0
+size_flags_vertical = 3
+placeholder_text = "Write Here"
+wrap_mode = 1
+draw_tabs = true
+draw_spaces = true
+caret_blink = true
+
+[connection signal="resize_request" from="." to="." method="_on_resize_request"]
+[connection signal="text_changed" from="Text" to="." method="_on_value_changed"]

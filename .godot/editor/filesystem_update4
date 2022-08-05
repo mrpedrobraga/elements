@@ -1,4 +1,8 @@
-res://assets/layouts/SpriteEditorTab.tscn
-res://assets/script/editor_components/DataGraphNode.gd
 res://assets/Editor_Desktop.tscn
+res://assets/script/editor_components/DataGraphNode.gd
+res://assets/layouts/SpriteEditorTab.tscn
+res://assets/components/DataPickers/ColorPicker.tscn
+res://assets/themes/theme/styleboxes/simple_flat_text_input_disabled.stylebox
+res://assets/themes/theme/StarDark.theme
 res://demo/tech_test/GraphEdit.gd
+res://assets/components/RenderGraphNodes/FloatNode.tscn

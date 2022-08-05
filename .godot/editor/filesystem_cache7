@@ -1,5 +1,5 @@
 0b7126e0c6e86d3ec295a72f5aa6e0bd
-::res://::1659315485
+::res://::1659447835
 default_env.tres::Environment::-1::1651101277::0::1::::<><>::
 export_presets.cfg::TextFile::-1::1651558995::0::1::::<><>::
 icon.png::CompressedTexture2D::6361837902725261402::1651101277::1659201290::1::::<><>::
@@ -98,10 +98,10 @@ VectorStroke.gd::GDScript::-1::1654010157::0::1::::VectorStroke<>Line2D<>::
 plugin.cfg::TextFile::-1::1552845680::0::1::::<><>::
 plugin.gd::GDScript::-1::1653609560::0::1::::<>EditorPlugin<>::
 vox-importer.gd::GDScript::-1::1653609498::0::1::::<>EditorImportPlugin<>::
-::res://assets/::1659315005
-Editor_Desktop.tscn::PackedScene::4639115290886651184::1659315005::0::1::::<><>::uid://cqhbigt0vsdbm<>res://assets/script/Editor.gd<>uid://ci5uuhfmiwus1<>uid://c1wl1a7k88od6<>uid://dsk8am258se6u<>uid://bir14t176x7th<>uid://drpwb8v0r5ri8
+::res://assets/::1659446362
+Editor_Desktop.tscn::PackedScene::4639115290886651184::1659446362::0::1::::<><>::uid://cqhbigt0vsdbm<>res://assets/script/Editor.gd<>uid://ci5uuhfmiwus1<>uid://c1wl1a7k88od6<>uid://dsk8am258se6u<>uid://bir14t176x7th<>uid://drpwb8v0r5ri8
 SubEditor_A.tscn::PackedScene::8492293408986640221::1659202350::0::1::::<><>::uid://dsnbqhy6nrnr4
-::res://assets/components/::1659302613
+::res://assets/components/::1659379464
 LayerControl.gd::GDScript::-1::1659204702::0::1::::<>HBoxContainer<>::
 LayerControl.tscn::PackedScene::4402066433527177307::1659205733::0::1::::<><>::res://assets/components/LayerControl.gd<>uid://brt2ikp8otord<>uid://7r0ihab3skow<>uid://dsnbqhy6nrnr4
 VoxelModel.tscn::PackedScene::2472296601379837425::1653612921::0::1::::<><>::res://assets/shaders/Raymarch.gdshader<>uid://i8np04mwu520
@@ -115,6 +115,15 @@ UVPicker.gd::GDScript::-1::1651540678::0::1::::UVPickerControl<>Control<>::
 HSV Picker.gd::GDScript::-1::1654439757::0::1::::<>Control<>::
 ::res://assets/components/DataPickers/NormalPickers/::1659201290
 Sphere.png::CompressedTexture2D::5652581334592636219::1654167469::1659201290::1::::<><>::
+::res://assets/components/RenderGraphNodes/::1659446345
+BoolNode.tscn::PackedScene::4028523412766099243::1659446236::0::1::::<><>::res://assets/script/editor_components/DataGraphNode.gd<>res://assets/script/editor_components/BooleanButton.gd
+ColorNode.tscn::PackedScene::1740586968988046392::1659446345::0::1::::<><>::res://assets/script/editor_components/DataGraphNode.gd
+FloatNode.tscn::PackedScene::1191253583351218623::1659446218::0::1::::<><>::res://assets/script/editor_components/DataGraphNode.gd
+FloatSliderNode.tscn::PackedScene::931239808413723442::1659446244::0::1::::<><>::res://assets/script/editor_components/DataGraphNode.gd
+IntegerNode.tscn::PackedScene::1832889271722319983::1659446226::0::1::::<><>::res://assets/script/editor_components/DataGraphNode.gd
+LabelNode.tscn::PackedScene::3081417432921020388::1659446335::0::1::::<><>::res://assets/script/editor_components/DataGraphNode.gd
+LongStringNode.tscn::PackedScene::1174570409150737058::1659445943::0::1::::<><>::res://assets/script/editor_components/DataGraphNode.gd
+StringNode.tscn::PackedScene::2308670689502661489::1659446320::0::1::::<><>::res://assets/script/editor_components/DataGraphNode.gd
 ::res://assets/fonts/::1659201287
 CascadiaCode.ttf::FontFile::6194242870971221397::1630016970::1659201287::1::::<><>::
 CascadiaCodeItalic.ttf::FontFile::7177605924803446914::1630016970::1659201287::1::::<><>::
@@ -142,11 +151,11 @@ outline_colorize_white_24dp.png::CompressedTexture2D::5594418608056956128::16500
 outline_edit_black_24dp.png::CompressedTexture2D::3180077710861321636::1650063598::1659201290::1::::<><>::
 outline_grade_white_24dp.png::CompressedTexture2D::4272195129779592252::1650064352::1659201290::1::::<><>::
 outline_remove_white_24dp.png::CompressedTexture2D::8826117585539305068::1650062886::1659201290::1::::<><>::
-::res://assets/layouts/::1659315006
+::res://assets/layouts/::1659446362
 LayerView.tscn::PackedScene::1556199331255744441::1651458144::0::1::::<><>::
-SpriteEditorTab.tscn::PackedScene::5397533880789958974::1659315006::0::1::::<><>::uid://cqhbigt0vsdbm<>uid://drpwb8v0r5ri8<>res://assets/script/SpriteEditorTab.gd<>res://assets/components/DataPickers/UVPicker.gd<>res://assets/script/components/_LayerBase.gd<>uid://dsnbqhy6nrnr4<>res://assets/script/components/LayerTypes/RasterDataLayer.gd<>uid://exaaiu3442j4<>res://assets/script/components/LayerTypes/GroupLayer.gd<>uid://dsk8am258se6u<>uid://bkj3jyaxknayi<>uid://7r0ihab3skow<>uid://bb6nkfh2xpiga<>uid://bir14t176x7th<>uid://4fxkqvdgkjlu<>uid://cvi1qjm0lk2ue<>uid://brt2ikp8otord<>uid://df5rb8vbmkaty<>res://assets/script/Dock_DOCUMENT.gd<>res://assets/script/editor_components/DatumGraphNode.gd<>res://demo/tech_test/GraphEdit.gd<>uid://b3ynnkajb623p
-::res://assets/script/::1659303331
-DataRef.gd::GDScript::-1::1659313005::0::1::::DataRef<>RefCounted<>::
+SpriteEditorTab.tscn::PackedScene::5397533880789958974::1659446362::0::1::::<><>::uid://cqhbigt0vsdbm<>uid://drpwb8v0r5ri8<>res://assets/script/SpriteEditorTab.gd<>res://assets/components/DataPickers/UVPicker.gd<>res://assets/script/components/_LayerBase.gd<>uid://dsnbqhy6nrnr4<>res://assets/script/components/LayerTypes/RasterDataLayer.gd<>uid://exaaiu3442j4<>res://assets/script/components/LayerTypes/GroupLayer.gd<>uid://dsk8am258se6u<>uid://bkj3jyaxknayi<>uid://7r0ihab3skow<>uid://bb6nkfh2xpiga<>uid://bir14t176x7th<>uid://4fxkqvdgkjlu<>uid://cvi1qjm0lk2ue<>uid://brt2ikp8otord<>uid://df5rb8vbmkaty<>res://assets/script/Dock_DOCUMENT.gd<>uid://q8b1i8kdsojv<>uid://1d4oh2nb6o3x<>res://demo/tech_test/GraphEdit.gd<>uid://b3ynnkajb623p<>uid://bxnpgr8xo82bv<>uid://njdnboto3ghm<>uid://75lp7d2t2bjt<>uid://bj5wq3eky1u5i<>uid://qy8adrfsnug5<>uid://y2fhik0r1pwq
+::res://assets/script/::1659379274
+DataRef.gd::GDScript::-1::1659379274::0::1::::DataRef<>RefCounted<>::
 Dock_DOCUMENT.gd::GDScript::-1::1659203599::0::1::::<>SubViewportContainer<>::
 Editor.gd::GDScript::-1::1651458211::0::1::::<>Panel<>::
 SpriteEditorTab.gd::GDScript::-1::1654438964::0::1::::SpriteEditor<>Panel<>::
@@ -164,8 +173,9 @@ RasterDataLayer.gd::GDScript::-1::1653574696::0::1::::RasterDataLayer<>Layer<>::
 ::res://assets/script/components/Tools/::1654448758
 BrushTool.gd::GDScript::-1::1654448758::0::1::::BrushTool<>EditingTool<>::
 EyedropperTool.gd::GDScript::-1::1651540027::0::1::::EyedropperTool<>EditingTool<>::
-::res://assets/script/editor_components/::1659315005
-DataGraphNode.gd::GDScript::-1::1659315440::0::1::::DataGraphNode<>GraphNode<>::
+::res://assets/script/editor_components/::1659446218
+BooleanButton.gd::GDScript::-1::1659381444::0::1::::<>Button<>::
+DataGraphNode.gd::GDScript::-1::1659446218::0::1::::DataGraphNode<>GraphNode<>::
 ::res://assets/script/editor_components/DataRefTypes/::1659310087
 StringRef.gd::GDScript::-1::1659313031::0::1::::StringRef<>DataRef<>::
 Vector2iRef.gd::GDScript::-1::1659314095::0::1::::Vector2iRef<>DataRef<>::
@@ -174,7 +184,6 @@ Vector3iRef.gd::GDScript::-1::1659314112::0::1::::Vector3iRef<>DataRef<>::
 Vector3Ref.gd::GDScript::-1::1659314128::0::1::::Vector3Ref<>DataRef<>::
 Vector4iRef.gd::GDScript::-1::1659314133::0::1::::Vector4iRef<>DataRef<>::
 Vector4Ref.gd::GDScript::-1::1659314139::0::1::::Vector4Ref<>DataRef<>::
-::res://assets/script/editor_components/RenderGraphNodes/::1659307387
 ::res://assets/shaders/::1653613375
 Raymarch.gdshader::Shader::-1::1653613375::0::1::::<><>::
 UVMap.gdshader::Shader::-1::1651386105::0::1::::<><>::
@@ -185,8 +194,8 @@ SVGradient.gdshader::Shader::-1::1651357036::0::1::::<><>::
 ::res://assets/shaders/modifiers/::1651274286
 ::res://assets/themes/::1655047803
 FlatDark.theme::Theme::5424672635799147410::1651529728::0::1::::<><>::uid://d05okgcvqpina
-::res://assets/themes/theme/::1659203378
-StarDark.theme::Theme::5910388858873188730::1659203378::0::1::::<><>::uid://d05okgcvqpina<>uid://b47mlt4x4ar34<>uid://d0ctjlopd2i51<>uid://btf7wesxxjstw<>uid://b2xf3kgri81d7<>uid://6widxmmdev2k<>uid://3kc62tu3x8na<>uid://dxxn8kusfrcui
+::res://assets/themes/theme/::1659382582
+StarDark.theme::Theme::5910388858873188730::1659382582::0::1::::<><>::uid://d05okgcvqpina<>uid://b47mlt4x4ar34<>uid://d0ctjlopd2i51<>uid://btf7wesxxjstw<>uid://b2xf3kgri81d7<>uid://6widxmmdev2k<>uid://3kc62tu3x8na<>uid://dxxn8kusfrcui
 ::res://assets/themes/theme/components/::1655043373
 text_inside.tres::StyleBoxFlat::2221762783816288196::1655043373::0::1::::<><>::
 ::res://assets/themes/theme/fonts/::1659201287
@@ -233,8 +242,8 @@ thep.png::CompressedTexture2D::8337267550069346573::1653764905::1659201289::1:::
 tileset.png::CompressedTexture2D::3366280166084238740::1653776262::1659201289::1::::<><>::
 tile_map.tscn::PackedScene::2047213576005138814::1655048082::0::1::::<><>::uid://bn7we30o5fvyi
 void-city.png::CompressedTexture2D::4133697950872221688::1659179568::1659205494::1::::<><>::
-::res://demo/tech_test/::1659314437
-GraphEdit.gd::GDScript::-1::1659314587::0::1::::<>GraphEdit<>::
+::res://demo/tech_test/::1659445402
+GraphEdit.gd::GDScript::-1::1659445402::0::1::::<>GraphEdit<>::
 LayerNodes.tscn::PackedScene::8379442667280893221::1659308231::0::1::::<><>::res://demo/tech_test/GraphEdit.gd
 suzanne.obj::Mesh::6866063135825243130::1653236110::1659201292::1::::<><>::
 suzanne.png::CompressedTexture2D::2263098835190439778::1653356182::1659201290::1::::<><>::

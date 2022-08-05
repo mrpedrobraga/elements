@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://y2fhik0r1pwq"]
+
+[ext_resource type="Script" path="res://assets/script/editor_components/DataGraphNode.gd" id="1_ue10e"]
+
+[node name="Color" type="GraphNode"]
+offset_right = 128.0
+offset_bottom = 72.0
+mouse_filter = 1
+title = "Color"
+position_offset = Vector2(636, 179)
+show_close = true
+slot/0/left_enabled = true
+slot/0/left_type = 20
+slot/0/left_color = Color(1, 0.207843, 0.733333, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = true
+slot/0/right_type = 20
+slot/0/right_color = Color(1, 0.207843, 0.733333, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+script = ExtResource("1_ue10e")
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="."]
+custom_minimum_size = Vector2(0, 32)
+offset_left = 16.0
+offset_top = 32.0
+offset_right = 112.0
+offset_bottom = 64.0
+text = "Color"
+
+[connection signal="color_changed" from="ColorPickerButton" to="." method="_on_value_changed"]
